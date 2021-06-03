@@ -30,7 +30,7 @@ implementation 'com.github.fiftyonemoon:Rapid:1.0.0'
 
 ## Usage
 
-This library have 5 modified views based on ##Android original views:
+This library have 5 modified views based on Android original views:
 
 - [`RapidConstraintLayout`](resize/src/main/java/com/fom/rapid/resize/RapidConstraintLayout.java)
 - [`RapidRelativeLayout`](resize/src/main/java/com/fom/rapid/resize/RapidRelativeLayout.java)
