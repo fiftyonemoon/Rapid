@@ -24,4 +24,4 @@ implementation 'com.github.fiftyonemoon:Rapid:1.0.0'
 
 ## Sample
 
-<img src="./samples/720 x 1280.png" alt="Normal Keyboard" width="270"> <img src="./Sample/1080 x 1920.png" alt="Normal Keyboard" width="270">
+<img src="./samples/720 x 1280.png" alt="720x1280" width="270"> <img src="./samples/1080 x 1920.png" alt="1080x1920" width="270">
