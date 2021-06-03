@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RapidView">
+        <!-- Set true if resize all children in parent view.
+            Set false if only resize parent view. -->
+        <attr name="resizeChildren" format="boolean" />
+        <!-- Set true if measure margin according to device width and height.
+           Set false will ignore measure margin of the view.-->
+        <attr name="measureMargin" format="boolean" />
+        <!-- Set true if measure padding according to device width and height.
+             Set false will ignore measure padding of the view.-->
+        <attr name="measurePadding" format="boolean" />
+        <!-- This attr will measure width and height of view
+             with value as mentioned below.  -->
+        <attr name="measureWith" format="integer">
+            <!-- It will measure width and height of view according device width and height. -->
+            <enum name="none" value="0" />
+            <!-- It will measure width and height of view according device width. -->
+            <enum name="width" value="-1" />
+            <!-- It will measure width and height of view according device height. -->
+            <enum name="height" value="-2" />
+        </attr>
+    </declare-styleable>
+
+    <!-- The style set of RapidConstraintLayout.-->
+    <declare-styleable name="RapidConstraintLayout">
+        <attr name="resizeChildren" />
+        <attr name="measureMargin" />
+        <attr name="measurePadding" />
+        <attr name="measureWith" />
+    </declare-styleable>
+
+    <!-- The style set of RapidFrameLayout.-->
+    <declare-styleable name="RapidFrameLayout">
+        <attr name="resizeChildren" />
+        <attr name="measureMargin" />
+        <attr name="measurePadding" />
+        <attr name="measureWith" />
+    </declare-styleable>
+
+    <!-- The style set of RapidLinearLayout.-->
+    <declare-styleable name="RapidLinearLayout">
+        <attr name="resizeChildren" />
+        <attr name="measureMargin" />
+        <attr name="measurePadding" />
+        <attr name="measureWith" />
+    </declare-styleable>
+
+    <!-- The style set of RapidRelativeLayout.-->
+    <declare-styleable name="RapidRelativeLayout">
+        <attr name="resizeChildren" />
+        <attr name="measureMargin" />
+        <attr name="measurePadding" />
+        <attr name="measureWith" />
+    </declare-styleable>
+
+    <!-- The style set of RapidImageView.-->
+    <declare-styleable name="RapidImageView">
+        <attr name="measureMargin" />
+        <attr name="measurePadding" />
+        <attr name="measureWith" />
+    </declare-styleable>
+</resources>
