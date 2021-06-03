@@ -45,7 +45,8 @@ This is sample of layout.
 
 (1) [`RapidConstraintLayout`]
 
-```<?xml version="1.0" encoding="utf-8"?>
+```
+<?xml version="1.0" encoding="utf-8"?>
 <com.fom.rapid.resize.RapidConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -54,12 +55,12 @@ This is sample of layout.
     android:orientation="horizontal"
     android:gravity="center"
     android:background="@drawable/bg"
-    app:measureWith="width"
-    app:measureMargin="false"
-    app:resizeChildren="true"
+    app:measureWith="width"  //Measure view with width
+    app:measureMargin="false" //Keep applied margin as it is, don't change on resize
+    app:resizeChildren="true" //Resize this parent (RapidConstraintLayout) children
     tools:context=".MainActivity">
 
-    <!--Add views here-->
+    <!--Add your views here-->
 
 </com.fom.rapid.resize.RapidConstraintLayout>
 ```
