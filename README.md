@@ -55,9 +55,10 @@ This is sample of layout.
     android:orientation="horizontal"
     android:gravity="center"
     android:background="@drawable/bg"
-    app:measureWith="width"  //Measure view with width
-    app:measureMargin="false" //Keep applied margin as it is, don't change on resize
-    app:resizeChildren="true" //Resize this parent (RapidConstraintLayout) children
+    app:measureWith="width"  		//Measure view with width
+    app:measureMargin="false" 		//Keep applied margin as it is
+    app:measurePadding="true" 		//Resize applied padding
+    app:resizeChildren="true"		//Resize this parent (RapidConstraintLayout) children
     tools:context=".MainActivity">
 
     <!--Add your views here-->
