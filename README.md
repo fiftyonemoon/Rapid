@@ -21,3 +21,7 @@ allprojects {
 ```groovy
 implementation 'com.github.fiftyonemoon:Rapid:1.0.0'
 ```
+
+## Sample
+
+<img src="./Sample/720 x 1280.png" alt="Normal Keyboard" width="270"> <img src="./Sample/1080 x 1920.png" alt="Normal Keyboard" width="270">
