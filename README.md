@@ -40,7 +40,7 @@ This library have 5 modified views which is based on Android original views:
 
 ## Attrs Usage
 
-- [`attrs`](resize/src/main/res/value/attrs.xml) Check out the attrs and their usage.
+- [`attrs`](resize/src/main/res/values/attrs.xml) Check out the attrs and their usage.
 
 ## XML Usage
 This is sample of layout.
