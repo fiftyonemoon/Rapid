@@ -30,4 +30,14 @@ implementation 'com.github.fiftyonemoon:Rapid:1.0.0'
 
 ## Usage
 
-- [`activity_main`](app/src/main/res/layout/activity_main.xml) This is sample layout of library. 
+This library have 5 modified views based on ##Android original views:
+
+- [`RapidConstraintLayout`](resize/src/main/java/com/fom/rapid/resize/RapidConstraintLayout.java)
+- [`RapidRelativeLayout`](resize/src/main/java/com/fom/rapid/resize/RapidRelativeLayout.java)
+- [`RapidLinearLayout`](resize/src/main/java/com/fom/rapid/resize/RapidLinearLayout.java)
+- [`RapidFrameLayout`](resize/src/main/java/com/fom/rapid/resize/RapidFrameLayout.java)
+- [`RapidImageView`](resize/src/main/java/com/fom/rapid/resize/RapidImageView.java)
+
+This is sample of layout.
+
+- [`activity_main`](app/src/main/res/layout/activity_main.xml) 
