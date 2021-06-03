@@ -28,7 +28,7 @@ implementation 'com.github.fiftyonemoon:Rapid:1.0.0'
 
 <img src="./samples/720 x 1280.png" alt="720x1280" width="270"> <img src="./samples/1080 x 1920.png" alt="1080x1920" width="270">
 
-## Usage
+## Overview
 
 This library have 5 modified views which is based on Android original views:
 
@@ -38,6 +38,28 @@ This library have 5 modified views which is based on Android original views:
 - [`RapidFrameLayout`](resize/src/main/java/com/fom/rapid/resize/RapidFrameLayout.java)
 - [`RapidImageView`](resize/src/main/java/com/fom/rapid/resize/RapidImageView.java)
 
+## XML Usage
 This is sample of layout.
 
-- [`activity_main`](app/src/main/res/layout/activity_main.xml) 
+- [`activity_main`](app/src/main/res/layout/activity_main.xml)
+
+(1) [`RapidConstraintLayout`]
+
+```<?xml version="1.0" encoding="utf-8"?>
+<com.fom.rapid.resize.RapidConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:gravity="center"
+    android:background="@drawable/bg"
+    app:measureWith="width"
+    app:measureMargin="false"
+    app:resizeChildren="true"
+    tools:context=".MainActivity">
+
+    <!--Add views here-->
+
+</com.fom.rapid.resize.RapidConstraintLayout>
+```
