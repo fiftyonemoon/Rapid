@@ -30,4 +30,4 @@ implementation 'com.github.fiftyonemoon:Rapid:1.0.0'
 
 ## Usage
 
-- [`activity_main`](app/src/main/res/activity_main.xml) This is sample layout of library. 
+- [`activity_main`](app/src/main/res/layout/activity_main.xml) This is sample layout of library. 
