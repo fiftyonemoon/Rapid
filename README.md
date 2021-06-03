@@ -21,13 +21,6 @@ allprojects {
 ```groovy
 implementation 'com.github.fiftyonemoon:Rapid:1.0.0'
 ```
-
-## Device Sample
-
-(1) 720x1280 	(2) 1080x1920
-
-<img src="./samples/720 x 1280.png" alt="720x1280" width="270"> <img src="./samples/1080 x 1920.png" alt="1080x1920" width="270">
-
 ## Overview
 
 This library have 5 modified views which is based on Android original views:
@@ -69,3 +62,8 @@ This is sample of layout.
 
 </com.fom.rapid.resize.RapidConstraintLayout>
 ```
+## Device Sample
+
+(1) 720x1280 	(2) 1080x1920
+
+<img src="./samples/720 x 1280.png" alt="720x1280" width="270"> <img src="./samples/1080 x 1920.png" alt="1080x1920" width="270">
