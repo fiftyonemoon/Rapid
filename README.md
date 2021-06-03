@@ -38,6 +38,10 @@ This library have 5 modified views which is based on Android original views:
 - [`RapidFrameLayout`](resize/src/main/java/com/fom/rapid/resize/RapidFrameLayout.java)
 - [`RapidImageView`](resize/src/main/java/com/fom/rapid/resize/RapidImageView.java)
 
+## Attrs Usage
+
+- [`attrs`](resize/src/main/res/value/attrs.xml) Check out the attrs and their usage.
+
 ## XML Usage
 This is sample of layout.
 
