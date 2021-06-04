@@ -1,4 +1,4 @@
-# Rapid
+# Rapid - Resize your design
  Hello World!
  
  A library that automatically resize your XML layout with device width and height.
