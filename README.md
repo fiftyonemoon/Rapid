@@ -2,6 +2,7 @@
  Hello World!
  
  A library that automatically resize your XML layout with device width and height.
+ No matter your device orientation is protrait or landscape.
 
 ## SDK Information
 minSDKVersion: 16 & maxSDKVersion: 30
