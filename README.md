@@ -47,32 +47,12 @@ There are 4 main attributes will be used:
 - [`attrs`](resize/src/main/res/values/attrs.xml) For more info check out the attrs and their usage.
 
 ## XML Usage
-This is sample of layout.
 
-- [`activity_main`](app/src/main/res/layout/activity_main.xml)
+- [`rapid_constraint_layout`](app/src/main/res/layout/rapid_constraint_layout.xml) RapidConstraintLayout sample.
+- [`rapid_relative_layout`](app/src/main/res/layout/rapid_relative_layout.xml) RapidReplativeLayout sample.
+- [`rapid_image_view`](app/src/main/res/layout/rapid_image_view.xml) RapidImageView sample.
 
-(1) [`RapidConstraintLayout`]
 
-```
-<?xml version="1.0" encoding="utf-8"?>
-<com.fom.rapid.resize.RapidConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:gravity="center"
-    android:background="@drawable/bg"
-    app:measureWith="width"  		//Measure view with width
-    app:measureMargin="false" 		//Keep applied margin as it is
-    app:measurePadding="true" 		//Resize applied padding
-    app:resizeChildren="true"		//Resize this parent (RapidConstraintLayout) children
-    tools:context=".MainActivity">
-
-    <!--Add your views here-->
-
-</com.fom.rapid.resize.RapidConstraintLayout>
-```
 ## Device Sample
 
 (1) 720x1280 	(2) 1080x1920
