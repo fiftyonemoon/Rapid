@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!--Single ImageView can resize with RapidImageView.-->
+
+    <com.fom.rapid.resize.RapidImageView
+        android:layout_width="@dimen/px700"
+        android:layout_height="@dimen/px700"
+        android:layout_centerInParent="true"
+        app:measureWith="width"
+        android:src="@drawable/button" />
+
+    <com.fom.rapid.resize.RapidImageView
+        android:layout_width="@dimen/px490"
+        android:layout_height="@dimen/px490"
+        android:layout_centerInParent="true"
+        app:measureWith="width"
+        android:src="@drawable/progress_bar" />
+
+    <com.fom.rapid.resize.RapidImageView
+        android:layout_width="@dimen/px296"
+        android:layout_height="@dimen/px296"
+        android:layout_centerInParent="true"
+        app:measureWith="width"
+        android:src="@drawable/center_button" />
+
+</RelativeLayout>
