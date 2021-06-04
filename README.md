@@ -69,4 +69,4 @@ This is sample of layout.
 
 (3) Landscape 720x1280
 
-<img src="./samples/landscape.png" alt="720x1280" width="270">
+<img src="./samples/landscape.png" alt="720x1280" width="512">
