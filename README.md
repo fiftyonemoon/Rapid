@@ -37,7 +37,14 @@ This library have 5 modified views which is based on Android original views:
 
 ## Attrs Usage
 
-- [`attrs`](resize/src/main/res/values/attrs.xml) Check out the attrs and their usage.
+There are 4 main attributes will be used:
+
+- [`measureWith`](resize/src/main/res/values/attrs.xml) Which will resize your view with device width and height.
+- [`measureMargin`](resize/src/main/res/values/attrs.xml) Set true will resize your applied margin and false will keep applied margin as it is.
+- [`measurePadding`](resize/src/main/res/values/attrs.xml) Set true will resize your applied padding and false will keep applied padding as it is.
+- [`resizeChildren`](resize/src/main/res/values/attrs.xml) Set true will resize your parent view child views automatically and false will resize only parent view.
+
+- [`attrs`](resize/src/main/res/values/attrs.xml) For more info check out the attrs and their usage.
 
 ## XML Usage
 This is sample of layout.
