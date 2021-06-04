@@ -14,14 +14,18 @@ public class HeyMoon<assistant> {
 
     private View view;
 
-    final int default_width = 1080;
-    final int default_height = 1920;
+    int w1080 = 1080;
+    int h1920 = 1920;
+
+    private int default_width;
+    private int default_height;
 
     private int displayW;
     private int displayH;
     private int measureWith;
     private boolean measureMargin;
     private boolean measurePadding;
+    private boolean landscapeMode;
 
     /**
      * Resize helper class.
@@ -50,10 +54,11 @@ public class HeyMoon<assistant> {
     /**
      * Resize conditions.
      */
-    public HeyMoon<assistant> with(int measureWith, boolean measureMargin, boolean measurePadding) {
+    public HeyMoon<assistant> with(int measureWith, boolean measureMargin, boolean measurePadding, boolean landscapeMode) {
         this.measureWith = measureWith;
         this.measureMargin = measureMargin;
         this.measurePadding = measurePadding;
+        this.landscapeMode = landscapeMode;
         return this;
     }
 
@@ -68,6 +73,9 @@ public class HeyMoon<assistant> {
 
         displayW = displayMetrics.widthPixels;
         displayH = displayMetrics.heightPixels;
+
+        default_width = landscapeMode ? h1920 : w1080; // set width according to layout orientation
+        default_height = landscapeMode ? w1080 : h1920; // set height according to layout orientation
 
         ViewGroup.LayoutParams params = view.getLayoutParams();
 

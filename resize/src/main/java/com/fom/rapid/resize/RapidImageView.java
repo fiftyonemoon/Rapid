@@ -1,7 +1,7 @@
 package com.fom.rapid.resize;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.View;
@@ -19,6 +19,7 @@ public class RapidImageView extends androidx.appcompat.widget.AppCompatImageView
     private int measureWith;
     private boolean measureMargin;
     private boolean measurePadding;
+    private boolean landscapeMode;
 
     public RapidImageView(Context context) {
         super(context);
@@ -42,12 +43,12 @@ public class RapidImageView extends androidx.appcompat.widget.AppCompatImageView
 
         if (attrs != null) {
 
-            @SuppressLint("CustomViewStyleable")
             TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.RapidImageView, defStyle, 0);
 
             measureWith = array.getInt(R.styleable.RapidImageView_measureWith, 0);
             measureMargin = array.getBoolean(R.styleable.RapidImageView_measureMargin, true);
             measurePadding = array.getBoolean(R.styleable.RapidImageView_measurePadding, true);
+            landscapeMode = context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
 
             //add this view on global layout listener
             getViewTreeObserver().addOnGlobalLayoutListener(this);
@@ -76,7 +77,7 @@ public class RapidImageView extends androidx.appcompat.widget.AppCompatImageView
     private void resize(View view) {
         HeyMoon.resize()
                 .view(view)
-                .with(measureWith, measureMargin, measurePadding)
+                .with(measureWith, measureMargin, measurePadding, landscapeMode)
                 .now(getContext());
     }
 

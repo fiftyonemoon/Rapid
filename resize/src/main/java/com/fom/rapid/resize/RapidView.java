@@ -1,6 +1,7 @@
 package com.fom.rapid.resize;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.View;
@@ -20,6 +21,7 @@ public class RapidView implements ViewTreeObserver.OnGlobalLayoutListener {
     private boolean measurePadding;
     private boolean measureMargin;
     private boolean withChildren;
+    private boolean landscapeMode;
 
     public RapidView(Context context, View view, AttributeSet attrs, int defStyleAttr) {
         this.context = context;
@@ -40,6 +42,7 @@ public class RapidView implements ViewTreeObserver.OnGlobalLayoutListener {
             measureMargin = array.getBoolean(R.styleable.RapidView_measureMargin, true);
             measurePadding = array.getBoolean(R.styleable.RapidView_measurePadding, true);
             withChildren = array.getBoolean(R.styleable.RapidView_resizeChildren, false);
+            landscapeMode = context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
 
             array.recycle();
         }
@@ -91,7 +94,7 @@ public class RapidView implements ViewTreeObserver.OnGlobalLayoutListener {
     private void resize(View view) {
         HeyMoon.resize()
                 .view(view)
-                .with(measureWith, measureMargin, measurePadding)
+                .with(measureWith, measureMargin, measurePadding, landscapeMode)
                 .now(context);
     }
 

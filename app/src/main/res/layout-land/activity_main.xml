@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.fom.rapid.resize.RapidConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:gravity="center"
+    android:background="@drawable/bg"
+    app:measureWith="width"
+    app:measureMargin="false"
+    app:resizeChildren="true"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/ivMenu"
+        android:layout_width="@dimen/px70"
+        android:layout_height="@dimen/px70"
+        android:layout_margin="16dp"
+        android:src="@drawable/menu_button"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        app:layout_constraintTop_toTopOf="@+id/ivMenu"
+        app:layout_constraintBottom_toBottomOf="@+id/ivMenu"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:layout_width="@dimen/px140"
+        android:layout_height="@dimen/px74"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:src="@drawable/off_toggle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ivMenu"
+        app:layout_constraintBottom_toBottomOf="@+id/ivMenu"
+        tools:ignore="ContentDescription" />
+
+    <FrameLayout
+        android:id="@+id/buttonPanel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:layout_width="@dimen/px700"
+            android:layout_height="@dimen/px700"
+            android:src="@drawable/button"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:layout_width="@dimen/px490"
+            android:layout_height="@dimen/px490"
+            android:src="@drawable/progress_bar"
+            android:layout_gravity="center"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:layout_width="@dimen/px296"
+            android:layout_height="@dimen/px296"
+            android:layout_gravity="center"
+            android:src="@drawable/center_button"
+            tools:ignore="ContentDescription" />
+
+    </FrameLayout>
+
+    <ImageView
+        android:id="@+id/leftEqualizer"
+        android:layout_width="@dimen/px66"
+        android:layout_height="@dimen/px586"
+        android:src="@drawable/equalizer_press"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/buttonPanel"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonPanel"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/rightEqualizer"
+        android:layout_width="@dimen/px66"
+        android:layout_height="@dimen/px586"
+        android:src="@drawable/equalizer_press"
+        app:layout_constraintTop_toTopOf="@+id/buttonPanel"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonPanel"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="ContentDescription" />
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintStart_toEndOf="@+id/leftEqualizer"
+        app:layout_constraintEnd_toStartOf="@+id/buttonPanel"
+        app:layout_constraintTop_toTopOf="@+id/leftEqualizer"
+        app:layout_constraintBottom_toBottomOf="@+id/leftEqualizer">
+
+        <ImageView
+            android:layout_width="@dimen/px196"
+            android:layout_height="@dimen/px196"
+            android:src="@drawable/button_1"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:layout_width="@dimen/px196"
+            android:layout_height="@dimen/px196"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/button_2"
+            tools:ignore="ContentDescription" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintStart_toEndOf="@+id/buttonPanel"
+        app:layout_constraintEnd_toStartOf="@+id/rightEqualizer"
+        app:layout_constraintTop_toTopOf="@+id/rightEqualizer"
+        app:layout_constraintBottom_toBottomOf="@+id/rightEqualizer">
+
+        <ImageView
+            android:layout_width="@dimen/px196"
+            android:layout_height="@dimen/px196"
+            android:src="@drawable/button_3_press"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:layout_width="@dimen/px196"
+            android:layout_height="@dimen/px196"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/max_button"
+            tools:ignore="ContentDescription" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/ivFooter"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px196"
+        android:background="@drawable/footer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/ivMusic"
+        android:layout_width="@dimen/px96"
+        android:layout_height="@dimen/px96"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintStart_toStartOf="@+id/ivFooter"
+        app:layout_constraintTop_toTopOf="@id/ivFooter"
+        app:layout_constraintBottom_toBottomOf="@id/ivFooter"
+        tools:ignore="ContentDescription" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        app:layout_constraintStart_toEndOf="@+id/ivMusic"
+        app:layout_constraintTop_toTopOf="@id/ivFooter"
+        app:layout_constraintBottom_toBottomOf="@id/ivFooter"
+        app:layout_constraintEnd_toStartOf="@+id/ivPrev">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:text="@string/beautiful_ft_colby"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:text="@string/akon"
+            android:textSize="12sp"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/ivPrev"
+        android:layout_width="@dimen/px96"
+        android:layout_height="@dimen/px96"
+        android:layout_marginEnd="12dp"
+        android:layout_marginRight="12dp"
+        android:src="@drawable/play_back"
+        app:layout_constraintEnd_toStartOf="@+id/ivPlay"
+        app:layout_constraintTop_toTopOf="@id/ivFooter"
+        app:layout_constraintBottom_toBottomOf="@id/ivFooter"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/ivPlay"
+        android:layout_width="@dimen/px110"
+        android:layout_height="@dimen/px110"
+        android:layout_marginEnd="12dp"
+        android:layout_marginRight="12dp"
+        android:src="@drawable/play_button"
+        app:layout_constraintEnd_toStartOf="@+id/ivNext"
+        app:layout_constraintTop_toTopOf="@id/ivFooter"
+        app:layout_constraintBottom_toBottomOf="@id/ivFooter"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/ivNext"
+        android:layout_width="@dimen/px96"
+        android:layout_height="@dimen/px96"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:src="@drawable/play_next"
+        app:layout_constraintEnd_toEndOf="@+id/ivFooter"
+        app:layout_constraintTop_toTopOf="@id/ivFooter"
+        app:layout_constraintBottom_toBottomOf="@id/ivFooter"
+        tools:ignore="ContentDescription" />
+
+</com.fom.rapid.resize.RapidConstraintLayout>
