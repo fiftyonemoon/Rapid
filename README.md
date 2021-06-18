@@ -10,7 +10,7 @@
 
 ## SDK Information
 minSDKVersion: 16 & maxSDKVersion: 30
-[![](https://jitpack.io/v/fiftyonemoon/EmojiLibrary.svg)](https://jitpack.io/#fiftyonemoon/EmojiLibrary)
+[![](https://jitpack.io/v/fiftyonemoon/Rapid.svg)](https://jitpack.io/#fiftyonemoon/Rapid)
  
  ## Implementation
 
