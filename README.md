@@ -42,7 +42,7 @@ This library have 5 modified views which is based on Android original views:
 ## XML Usage
 This is sample of layout.
 
-- [`activity_main`](app/src/main/res/layout/rapid_constraint_layout.xml)
+- [`rapid_constraint_layout`](app/src/main/res/layout/rapid_constraint_layout.xml)
 
 (1) [`RapidConstraintLayout`]
 
