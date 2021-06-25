@@ -1,16 +1,27 @@
-package com.fom.rapid.resize.assistant;
+package com.fom.rapid.app;
 
 import android.content.Context;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.IntDef;
+
+import com.fom.rapid.assistant.HeyMoon;
+import com.fom.rapid.resize.BuildConfig;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
 /**
- * @author hardkgosai. created on 27/05/2021.
- * <p>
- * A virtual assistant of rapid library.
+ * Created on 28th May 2021.
+ *
+ * @author hardkgosai.
+ * @since 1.0.0
  */
-public class HeyMoon<assistant> {
+public class Resize<resize> {
+
+    private final boolean debug = BuildConfig.DEBUG;
 
     private View view;
 
@@ -28,33 +39,22 @@ public class HeyMoon<assistant> {
     private boolean landscapeMode;
 
     /**
-     * Resize helper class.
-     */
-    public static class Resize extends HeyMoon<Resize> {
-
-    }
-
-    /**
-     * Helper constructor.
-     */
-    public static Resize resize() {
-        return new Resize();
-    }
-
-    /**
      * The view which we have to resize.
-     *
-     * @throws RuntimeException if view is missing on call {@link #now(Context)} method.
      */
-    public HeyMoon<assistant> view(View view) {
+    public Resize<resize> view(View view) {
         this.view = view;
         return this;
     }
 
     /**
      * Resize conditions.
+     *
+     * @param measureWith    - {@link Attrs}
+     * @param measureMargin  - if true applied margin will be measured, false to keep as it is.
+     * @param measurePadding - if true applied padding will be measured, false to keep as it is.
+     * @param landscapeMode  - device orientation.
      */
-    public HeyMoon<assistant> with(int measureWith, boolean measureMargin, boolean measurePadding, boolean landscapeMode) {
+    public Resize<resize> with(@Attrs int measureWith, boolean measureMargin, boolean measurePadding, boolean landscapeMode) {
         this.measureWith = measureWith;
         this.measureMargin = measureMargin;
         this.measurePadding = measurePadding;
@@ -64,6 +64,8 @@ public class HeyMoon<assistant> {
 
     /**
      * Start view resizing.
+     *
+     * @throws RuntimeException - view is missing {@link #view(View)}.
      */
     public void now(Context context) {
 
@@ -74,8 +76,8 @@ public class HeyMoon<assistant> {
         displayW = displayMetrics.widthPixels;
         displayH = displayMetrics.heightPixels;
 
-        default_width = landscapeMode ? h1920 : w1080; // set width according to layout orientation
-        default_height = landscapeMode ? w1080 : h1920; // set height according to layout orientation
+        default_width = landscapeMode ? h1920 : w1080; // set width according to orientation
+        default_height = landscapeMode ? w1080 : h1920; // set height according to orientation
 
         ViewGroup.LayoutParams params = view.getLayoutParams();
 
@@ -99,7 +101,9 @@ public class HeyMoon<assistant> {
             params.width = (withHeight ? displayH : displayW) * width / (withHeight ? default_height : default_width);
         if (height > 0)
             params.height = (withWidth ? displayW : displayH) * height / (withWidth ? default_width : default_height);
-
+        if (debug) {
+            HeyMoon.log(view, Logs.logs.wh).show(params.width, params.height);
+        }
     }
 
     /**
@@ -117,6 +121,10 @@ public class HeyMoon<assistant> {
         int paddingEnd = measurePadding ? displayW * end / default_width : end;
 
         view.setPadding(paddingStart, paddingTop, paddingEnd, paddingBottom);
+
+        if (debug) {
+            HeyMoon.log(view, Logs.logs.padding).show(paddingStart, paddingTop, paddingEnd, paddingBottom);
+        }
     }
 
     /**
@@ -137,6 +145,10 @@ public class HeyMoon<assistant> {
             int marginEnd = measureMargin ? displayW * end / default_width : end;
 
             ((ViewGroup.MarginLayoutParams) params).setMargins(marginStart, marginTop, marginEnd, marginBottom);
+
+            if (debug) {
+                HeyMoon.log(view, Logs.logs.margin).show(marginStart, marginTop, marginEnd, marginBottom);
+            }
         }
     }
 
@@ -186,20 +198,24 @@ public class HeyMoon<assistant> {
     /**
      * Attributes class.
      */
-    public static class Attrs {
+    @IntDef({Attrs.none, Attrs.width, Attrs.height})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface Attrs {
 
         /**
          * It will measure width and height of view according device width and height.
          */
-        public static final int none = 0;
+        int none = 0;
 
         /**
          * It will measure width and height of view according device width.
          */
-        public static final int width = -1;
+        int width = -1;
+
         /**
          * It will measure width and height of view according device height.
          */
-        public static final int height = -2;
+        int height = -2;
+
     }
 }

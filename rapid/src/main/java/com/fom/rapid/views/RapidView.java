@@ -1,4 +1,4 @@
-package com.fom.rapid.resize;
+package com.fom.rapid.views;
 
 import android.content.Context;
 import android.content.res.Configuration;
@@ -8,10 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 
-import com.fom.rapid.resize.assistant.HeyMoon;
+import com.fom.rapid.resize.R;
+import com.fom.rapid.assistant.HeyMoon;
+import com.fom.rapid.app.Resize;
 
 /**
- * @author hardkgosai. created on 28/05/2021.
+ * Created on 28th May 2021.
+ *
+ * @author hardkgosai.
+ * @since 1.0.0
  */
 public class RapidView implements ViewTreeObserver.OnGlobalLayoutListener {
 
@@ -38,7 +43,7 @@ public class RapidView implements ViewTreeObserver.OnGlobalLayoutListener {
 
             TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.RapidView, defStyle, 0);
 
-            measureWith = array.getInt(R.styleable.RapidView_measureWith, HeyMoon.Attrs.none);
+            measureWith = array.getInt(R.styleable.RapidView_measureWith, Resize.Attrs.none);
             measureMargin = array.getBoolean(R.styleable.RapidView_measureMargin, true);
             measurePadding = array.getBoolean(R.styleable.RapidView_measurePadding, true);
             withChildren = array.getBoolean(R.styleable.RapidView_resizeChildren, false);
@@ -49,6 +54,7 @@ public class RapidView implements ViewTreeObserver.OnGlobalLayoutListener {
 
         //add this view on global layout listener
         view.getViewTreeObserver().addOnGlobalLayoutListener(this);
+
     }
 
     /**
@@ -65,6 +71,7 @@ public class RapidView implements ViewTreeObserver.OnGlobalLayoutListener {
         if (withChildren) {
             resizeChildren(view); // resize parent view children
         }
+
     }
 
     /**
@@ -87,7 +94,7 @@ public class RapidView implements ViewTreeObserver.OnGlobalLayoutListener {
     }
 
     /**
-     * Request assistant {@link HeyMoon} to resize all child.
+     * Request assistant {@link HeyMoon} to resize view.
      *
      * @param view which we have to resize.
      */

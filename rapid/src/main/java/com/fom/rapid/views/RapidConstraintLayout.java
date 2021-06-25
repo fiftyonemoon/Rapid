@@ -1,4 +1,4 @@
-package com.fom.rapid.resize;
+package com.fom.rapid.views;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -6,7 +6,10 @@ import android.util.AttributeSet;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 /**
- * @author hardkgosai. created on 28/05/2021.
+ * Created on 28th May 2021.
+ *
+ * @author hardkgosai.
+ * @since 1.0.0
  */
 public class RapidConstraintLayout extends ConstraintLayout {
 

@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.fom.rapid.resize.RapidRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.fom.rapid.views.RapidRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:gravity="center"
     android:background="@drawable/bg"
     app:measureWith="width"
-    app:resizeChildren="true"
-    tools:context=".MainActivity">
+    app:resizeChildren="true">
 
     <!--If the parent view is RapidRelativeLayout and
     attribute 'resizeChildren' is true then it will automatically
@@ -36,4 +33,4 @@
         android:src="@drawable/center_button"
         tools:ignore="ContentDescription" />
 
-</com.fom.rapid.resize.RapidRelativeLayout>
+</com.fom.rapid.views.RapidRelativeLayout>

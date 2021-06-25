@@ -48,7 +48,7 @@ This is sample of layout.
 
 ```
 <?xml version="1.0" encoding="utf-8"?>
-<com.fom.rapid.resize.RapidConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.fom.rapid.views.RapidConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -64,7 +64,7 @@ This is sample of layout.
 
     <!--Add your views here-->
 
-</com.fom.rapid.resize.RapidConstraintLayout>
+</com.fom.rapid.views.RapidConstraintLayout>
 ```
 ## Device Sample
 

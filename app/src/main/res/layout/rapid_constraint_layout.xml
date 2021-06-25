@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.fom.rapid.resize.RapidConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.fom.rapid.views.RapidConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:gravity="center"
     android:background="@drawable/bg"
     app:measureWith="width"
     app:measureMargin="false"
-    app:resizeChildren="true"
-    tools:context=".MainActivity">
+    app:resizeChildren="true">
 
     <ImageView
         android:id="@+id/ivMenu"
@@ -39,8 +36,8 @@
         android:layout_width="@dimen/px928"
         android:layout_height="@dimen/px176"
         android:src="@drawable/square"
-        app:layout_constraintTop_toBottomOf="@+id/ivMenu"
-        app:layout_constraintBottom_toTopOf="@+id/buttonPanel"
+        app:layout_constraintTop_toBottomOf="@id/ivMenu"
+        app:layout_constraintBottom_toTopOf="@id/buttonPanel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="ContentDescription" />
@@ -53,8 +50,8 @@
         android:text="@string/tap_to_on_off_booster"
         android:textColor="@color/white"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/servicePanel"
-        app:layout_constraintTop_toTopOf="@+id/servicePanel"
+        app:layout_constraintStart_toStartOf="@id/servicePanel"
+        app:layout_constraintTop_toTopOf="@id/servicePanel"
         app:layout_constraintBottom_toBottomOf="@id/servicePanel"/>
 
     <ImageView
@@ -64,7 +61,7 @@
         android:layout_marginRight="16dp"
         android:src="@drawable/off_toggle"
         app:layout_constraintEnd_toEndOf="@id/servicePanel"
-        app:layout_constraintTop_toTopOf="@+id/servicePanel"
+        app:layout_constraintTop_toTopOf="@id/servicePanel"
         app:layout_constraintBottom_toBottomOf="@id/servicePanel"
         tools:ignore="ContentDescription" />
 
@@ -104,16 +101,16 @@
         android:layout_height="@dimen/px586"
         android:src="@drawable/equalizer_press"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/buttonPanel"
-        app:layout_constraintBottom_toBottomOf="@+id/buttonPanel"
+        app:layout_constraintTop_toTopOf="@id/buttonPanel"
+        app:layout_constraintBottom_toBottomOf="@id/buttonPanel"
         tools:ignore="ContentDescription" />
 
     <ImageView
         android:layout_width="@dimen/px66"
         android:layout_height="@dimen/px586"
         android:src="@drawable/equalizer_press"
-        app:layout_constraintTop_toTopOf="@+id/buttonPanel"
-        app:layout_constraintBottom_toBottomOf="@+id/buttonPanel"
+        app:layout_constraintTop_toTopOf="@id/buttonPanel"
+        app:layout_constraintBottom_toBottomOf="@id/buttonPanel"
         app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="ContentDescription" />
 
@@ -121,8 +118,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/buttonPanel"
-        app:layout_constraintBottom_toTopOf="@+id/ivFooter"
+        app:layout_constraintTop_toBottomOf="@id/buttonPanel"
+        app:layout_constraintBottom_toTopOf="@id/ivFooter"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
@@ -175,7 +172,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:src="@mipmap/ic_launcher"
-        app:layout_constraintStart_toStartOf="@+id/ivFooter"
+        app:layout_constraintStart_toStartOf="@id/ivFooter"
         app:layout_constraintTop_toTopOf="@id/ivFooter"
         app:layout_constraintBottom_toBottomOf="@id/ivFooter"
         tools:ignore="ContentDescription" />
@@ -188,10 +185,10 @@
         android:layout_marginLeft="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        app:layout_constraintStart_toEndOf="@+id/ivMusic"
+        app:layout_constraintStart_toEndOf="@id/ivMusic"
         app:layout_constraintTop_toTopOf="@id/ivFooter"
         app:layout_constraintBottom_toBottomOf="@id/ivFooter"
-        app:layout_constraintEnd_toStartOf="@+id/ivPrev">
+        app:layout_constraintEnd_toStartOf="@id/ivPrev">
 
         <TextView
             android:layout_width="wrap_content"
@@ -231,7 +228,7 @@
         android:layout_marginEnd="12dp"
         android:layout_marginRight="12dp"
         android:src="@drawable/play_button"
-        app:layout_constraintEnd_toStartOf="@+id/ivNext"
+        app:layout_constraintEnd_toStartOf="@id/ivNext"
         app:layout_constraintTop_toTopOf="@id/ivFooter"
         app:layout_constraintBottom_toBottomOf="@id/ivFooter"
         tools:ignore="ContentDescription" />
@@ -243,9 +240,9 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:src="@drawable/play_next"
-        app:layout_constraintEnd_toEndOf="@+id/ivFooter"
+        app:layout_constraintEnd_toEndOf="@id/ivFooter"
         app:layout_constraintTop_toTopOf="@id/ivFooter"
         app:layout_constraintBottom_toBottomOf="@id/ivFooter"
         tools:ignore="ContentDescription" />
 
-</com.fom.rapid.resize.RapidConstraintLayout>
+</com.fom.rapid.views.RapidConstraintLayout>

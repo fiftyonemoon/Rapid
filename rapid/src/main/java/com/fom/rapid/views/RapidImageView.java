@@ -1,4 +1,4 @@
-package com.fom.rapid.resize;
+package com.fom.rapid.views;
 
 import android.content.Context;
 import android.content.res.Configuration;
@@ -9,10 +9,14 @@ import android.view.ViewTreeObserver;
 
 import androidx.annotation.Nullable;
 
-import com.fom.rapid.resize.assistant.HeyMoon;
+import com.fom.rapid.resize.R;
+import com.fom.rapid.assistant.HeyMoon;
 
 /**
- * @author hardkgosai. created on 28/05/2021.
+ * Created on 28th May 2021.
+ *
+ * @author hardkgosai.
+ * @since 1.0.0
  */
 public class RapidImageView extends androidx.appcompat.widget.AppCompatImageView implements ViewTreeObserver.OnGlobalLayoutListener {
 
