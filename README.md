@@ -1,4 +1,4 @@
-# Rapid
+# Rapid Resize
  Hello World!
  
  A library that automatically resize your XML layout with device width and height.
@@ -23,7 +23,7 @@ allprojects {
 ```
 
 ```groovy
-implementation 'com.github.fiftyonemoon:Rapid:1.0.0'
+implementation 'com.github.fiftyonemoon:Rapid:1.0.2'
 ```
 ## Overview
 
