@@ -29,15 +29,15 @@ implementation 'com.github.fiftyonemoon:Rapid:1.0.2'
 
 This library have 5 modified views which is based on Android original views:
 
-- [`RapidConstraintLayout`](resize/src/main/java/com/fom/rapid/views/RapidConstraintLayout.java)
-- [`RapidRelativeLayout`](resize/src/main/java/com/fom/rapid/views/RapidRelativeLayout.java)
-- [`RapidLinearLayout`](resize/src/main/java/com/fom/rapid/views/RapidLinearLayout.java)
-- [`RapidFrameLayout`](resize/src/main/java/com/fom/rapid/views/RapidFrameLayout.java)
-- [`RapidImageView`](resize/src/main/java/com/fom/rapid/views/RapidImageView.java)
+- [`RapidConstraintLayout`](rapid/src/main/java/com/fom/rapid/views/RapidConstraintLayout.java)
+- [`RapidRelativeLayout`](rapid/src/main/java/com/fom/rapid/views/RapidRelativeLayout.java)
+- [`RapidLinearLayout`](rapid/src/main/java/com/fom/rapid/views/RapidLinearLayout.java)
+- [`RapidFrameLayout`](rapid/src/main/java/com/fom/rapid/views/RapidFrameLayout.java)
+- [`RapidImageView`](rapid/src/main/java/com/fom/rapid/views/RapidImageView.java)
 
 ## Attrs Usage
 
-- [`attrs`](resize/src/main/res/values/attrs.xml) Check out the attrs and their usage.
+- [`attrs`](rapid/src/main/res/values/attrs.xml) Check out the attrs and their usage.
 
 ## XML Usage
 This is sample of layout.
