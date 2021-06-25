@@ -29,11 +29,11 @@ implementation 'com.github.fiftyonemoon:Rapid:1.0.2'
 
 This library have 5 modified views which is based on Android original views:
 
-- [`RapidConstraintLayout`](resize/src/main/java/com/fom/rapid/resize/RapidConstraintLayout.java)
-- [`RapidRelativeLayout`](resize/src/main/java/com/fom/rapid/resize/RapidRelativeLayout.java)
-- [`RapidLinearLayout`](resize/src/main/java/com/fom/rapid/resize/RapidLinearLayout.java)
-- [`RapidFrameLayout`](resize/src/main/java/com/fom/rapid/resize/RapidFrameLayout.java)
-- [`RapidImageView`](resize/src/main/java/com/fom/rapid/resize/RapidImageView.java)
+- [`RapidConstraintLayout`](resize/src/main/java/com/fom/rapid/views/RapidConstraintLayout.java)
+- [`RapidRelativeLayout`](resize/src/main/java/com/fom/rapid/views/RapidRelativeLayout.java)
+- [`RapidLinearLayout`](resize/src/main/java/com/fom/rapid/views/RapidLinearLayout.java)
+- [`RapidFrameLayout`](resize/src/main/java/com/fom/rapid/views/RapidFrameLayout.java)
+- [`RapidImageView`](resize/src/main/java/com/fom/rapid/views/RapidImageView.java)
 
 ## Attrs Usage
 
