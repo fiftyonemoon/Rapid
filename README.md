@@ -10,7 +10,7 @@
 
 ## SDK Information
 minSDKVersion: 16 & maxSDKVersion: 30
-[![](https://jitpack.io/v/fiftyonemoon/EmojiLibrary.svg)](https://jitpack.io/#fiftyonemoon/EmojiLibrary)
+[![](https://jitpack.io/v/fiftyonemoon/Rapid.svg)](https://jitpack.io/#fiftyonemoon/Rapid)
  
  ## Implementation
 
@@ -23,26 +23,26 @@ allprojects {
 ```
 
 ```groovy
-implementation 'com.github.fiftyonemoon:RapidResize:1.0.2'
+implementation 'com.github.fiftyonemoon:Rapid:1.0.2'
 ```
 ## Overview
 
 This library have 5 modified views which is based on Android original views:
 
-- [`RapidConstraintLayout`](resize/src/main/java/com/fom/rapid/resize/RapidConstraintLayout.java)
-- [`RapidRelativeLayout`](resize/src/main/java/com/fom/rapid/resize/RapidRelativeLayout.java)
-- [`RapidLinearLayout`](resize/src/main/java/com/fom/rapid/resize/RapidLinearLayout.java)
-- [`RapidFrameLayout`](resize/src/main/java/com/fom/rapid/resize/RapidFrameLayout.java)
-- [`RapidImageView`](resize/src/main/java/com/fom/rapid/resize/RapidImageView.java)
+- [`RapidConstraintLayout`](rapid/src/main/java/com/fom/rapid/views/RapidConstraintLayout.java)
+- [`RapidRelativeLayout`](rapid/src/main/java/com/fom/rapid/views/RapidRelativeLayout.java)
+- [`RapidLinearLayout`](rapid/src/main/java/com/fom/rapid/views/RapidLinearLayout.java)
+- [`RapidFrameLayout`](rapid/src/main/java/com/fom/rapid/views/RapidFrameLayout.java)
+- [`RapidImageView`](rapid/src/main/java/com/fom/rapid/views/RapidImageView.java)
 
 ## Attrs Usage
 
-- [`attrs`](resize/src/main/res/values/attrs.xml) Check out the attrs and their usage.
+- [`attrs`](rapid/src/main/res/values/attrs.xml) Check out the attrs and their usage.
 
 ## XML Usage
 This is sample of layout.
 
-- [`activity_main`](app/src/main/res/layout/activity_main.xml)
+- [`rapid_constraint_layout`](app/src/main/res/layout/rapid_constraint_layout.xml)
 
 (1) [`RapidConstraintLayout`]
 
