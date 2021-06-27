@@ -11,7 +11,7 @@
 ## SDK Information
 minSDKVersion: 16 & maxSDKVersion: 30
 [![](https://jitpack.io/v/fiftyonemoon/Rapid.svg)](https://jitpack.io/#fiftyonemoon/Rapid)
- 
+
  ## Implementation
 
 ```groovy
@@ -23,7 +23,7 @@ allprojects {
 ```
 
 ```groovy
-implementation 'com.github.fiftyonemoon:Rapid:1.0.2'
+implementation 'com.github.fiftyonemoon:Rapid:1.0.3'
 ```
 ## Overview
 
