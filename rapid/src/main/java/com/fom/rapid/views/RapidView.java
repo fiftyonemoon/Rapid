@@ -44,8 +44,8 @@ public class RapidView implements ViewTreeObserver.OnGlobalLayoutListener {
             TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.RapidView, defStyle, 0);
 
             measureWith = array.getInt(R.styleable.RapidView_measureWith, Resize.Attrs.none);
-            measureMargin = array.getBoolean(R.styleable.RapidView_measureMargin, true);
-            measurePadding = array.getBoolean(R.styleable.RapidView_measurePadding, true);
+            measureMargin = array.getBoolean(R.styleable.RapidView_measureMargin, false);
+            measurePadding = array.getBoolean(R.styleable.RapidView_measurePadding, false);
             withChildren = array.getBoolean(R.styleable.RapidView_resizeChildren, false);
             landscapeMode = context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
 

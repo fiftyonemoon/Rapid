@@ -18,12 +18,15 @@ public class Logs {
     private final logs l;
 
     public Logs(View v, logs l) {
-        this.s = getId(v).replace("com.fom.rapid:id/", "");
+        this.s = getId(v);
         this.l = l;
     }
 
     public void show(int i1, int i2) {
-        Log.d(TAG, s + ": " + l.getS1() + "=" + i1 + ", " + l.getS2() + "=" + i2);
+        Log.d(TAG, s +
+                ": " + l.getS1() + "=" + i1 +
+                ", " + l.getS2() + "=" + i2
+        );
     }
 
     public void show(int i1, int i2, int i3, int i4) {
@@ -37,7 +40,9 @@ public class Logs {
 
     private String getId(View view) {
         if (view.getId() == View.NO_ID) return "no-id";
-        else return view.getResources().getResourceName(view.getId());
+        else return view.getResources()
+                .getResourceName(view.getId())
+                .replace("com.fom.rapid:id/", "");
     }
 
     public enum logs {

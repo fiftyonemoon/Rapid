@@ -12,4 +12,6 @@
     <string name="are_you_sure_delete">Are you sure want to delete?</string>
     <string name="are_you_sure_exit">Are you sure want to exit?</string>
     <string name="are_you_sure_save">Are you sure want to save?</string>
+    <string name="choose_app">Select app to share</string>
+    <string name="null_path">Null path</string>
 </resources>

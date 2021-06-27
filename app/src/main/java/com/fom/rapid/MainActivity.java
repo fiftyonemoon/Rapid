@@ -3,11 +3,9 @@ package com.fom.rapid;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.view.View;
 
 import com.fom.rapid.assistant.HeyMoon;
 
@@ -23,13 +21,9 @@ public class MainActivity extends AppCompatActivity {
      * Hide navigation and status/notification bar for better result.
      */
     @Override
-    protected void onStart() {
-        super.onStart();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
-        } else {
-            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
-        }
+    protected void onResume() {
+        super.onResume();
+        HeyMoon.ui().hideSystemUI(getWindow());
     }
 
     /**

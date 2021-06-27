@@ -31,19 +31,19 @@ public class Dialogs {
      */
     public static class Alert {
 
-        public Dialog<Object> delete() {
-            return new Dialog<>(types.delete);
+        public Dialog delete() {
+            return new Dialog(types.delete);
         }
 
-        public Dialog<Object> exit() {
-            return new Dialog<>(types.exit);
+        public Dialog exit() {
+            return new Dialog(types.exit);
         }
 
-        public Dialog<Object> save() {
-            return new Dialog<>(types.save);
+        public Dialog save() {
+            return new Dialog(types.save);
         }
 
-        public static class Dialog<dialog> {
+        public static class Dialog {
 
             private AlertDialog alertDialog;
             private DialogInterface.OnClickListener listener;
@@ -54,12 +54,12 @@ public class Dialogs {
                 this.types = types;
             }
 
-            public Dialog<dialog> cancelable(boolean cancelable) {
+            public Dialog cancelable(boolean cancelable) {
                 this.cancelable = cancelable;
                 return this;
             }
 
-            public Dialog<dialog> listener(DialogInterface.OnClickListener listener) {
+            public Dialog listener(DialogInterface.OnClickListener listener) {
                 this.listener = listener ;
                 return this;
             }
