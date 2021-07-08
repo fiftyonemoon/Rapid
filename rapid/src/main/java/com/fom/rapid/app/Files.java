@@ -1,11 +1,14 @@
 package com.fom.rapid.app;
 
 import android.content.ActivityNotFoundException;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
+import android.provider.MediaStore;
 import android.util.Log;
+import android.webkit.MimeTypeMap;
 
 import androidx.annotation.RequiresApi;
 import androidx.core.content.FileProvider;
@@ -50,12 +53,12 @@ public class Files {
      */
     public static class Editor {
 
-        private EditListener listener;
+        private Listener listener;
 
         /**
          * {@link Editor} listener interface.
          */
-        public interface EditListener {
+        public interface Listener {
             void onComplete(String path);
 
             void onError(String message);
@@ -64,7 +67,7 @@ public class Files {
         /**
          * Set listener to listen process.
          */
-        public Editor setListener(EditListener listener) {
+        public Editor setListener(Listener listener) {
             this.listener = listener;
             return this;
         }
@@ -76,42 +79,36 @@ public class Files {
          * @param input - A file to copy.
          * @param dest  - A destination path where you want to copy.
          */
-        public void copy(File input, String dest) {
+        public void copy(Context context, File input, String dest) {
 
-            //input stream
-            try (InputStream in = new FileInputStream(input)) {
+            Utils utils = new Utils();
 
-                //final destination path
-                String finalDest = dest.isEmpty() ? input.getPath() : dest;
+            //final destination path
+            String finalDest = dest.isEmpty() ? input.getPath() : dest;
 
-                //final path with unique name
-                String finalPath = HeyMoon.file().utils().getUniqueFileName(finalDest);
+            //final path with unique name
+            String finalPath = utils.getUniqueFileName(finalDest);
 
-                if (debug) {
-                    Log.d(TAG, "copy: real path: " + input.getPath());
-                    Log.d(TAG, "copy: final path: " + finalPath);
-                }
+            if (debug) {
+                Log.d(TAG, "copy: real path: " + input.getPath());
+                Log.d(TAG, "copy: final path: " + finalPath);
+            }
 
-                //create file object of final path
-                File output = new File(finalPath);
+            //create file object of final path
+            File output = new File(finalPath);
 
-                //output stream
-                OutputStream out = new FileOutputStream(output);
+            boolean success = utils.writeFile(input, output); //write input data to output
 
-                byte[] buf = new byte[1024];
-                int len;
-                while ((len = in.read(buf)) > 0) {
-                    out.write(buf, 0, len); //write input file data to output file
-                }
+            if (success) { //write success
+
+                //add new output file to media store
+                utils.addToMediaStore(context, output);
 
                 if (listener != null) listener.onComplete(finalPath); //complete callback
 
-            } catch (IOException e) {
-
-                e.printStackTrace();
-
+            } else {
                 if (listener != null)
-                    listener.onError("Failed to duplicate"
+                    listener.onError("Failed to copy"
                             + ", Input file is valid?"
                             + ", Destination is valid?"); //error callback
             }
@@ -122,12 +119,20 @@ public class Files {
          *
          * @param file - A file to delete.
          */
-        public void delete(File file) {
+        public void delete(Context context, File file) {
 
             //check file existence
             if (file.exists()) {
 
                 if (file.delete()) { // if successfully deleted
+
+                    int i = HeyMoon.file().utils().removeFromMediaStore(context, file);
+
+                    if (debug) {
+                        Log.d(TAG, "delete: " + (i > 0
+                                ? "File deleted from media store"
+                                : "Failed to delete file from media store"));
+                    }
 
                     if (listener != null) listener.onComplete("");
 
@@ -142,8 +147,8 @@ public class Files {
          *
          * @param file - A file to duplicate.
          */
-        public void duplicate(File file) {
-            copy(file, "");
+        public void duplicate(Context context, File file) {
+            copy(context, file, "");
         }
 
         /**
@@ -152,7 +157,7 @@ public class Files {
          * @param input  - file to rename.
          * @param rename - new file name.
          */
-        public void rename(File input, String rename) {
+        public void rename(Context context, File input, String rename) {
 
             Utils utils = HeyMoon.file().utils();
 
@@ -176,7 +181,13 @@ public class Files {
 
             if (input.exists()) { //check file existence
 
-                if (input.renameTo(output)) { //do rename
+                if (input.renameTo(output)) { //if rename success
+
+                    //delete old file from media store
+                    utils.removeFromMediaStore(context, input);
+
+                    //add new renamed file to media store
+                    utils.addToMediaStore(context, output);
 
                     if (listener != null) listener.onComplete(finalPath); //complete callback
 
@@ -301,7 +312,7 @@ public class Files {
 
             File file = new File(filepath);
 
-            String parentPath = getParentPath(filepath);
+            String parentPath = file.getParent();
             String extension = getFileExtension(filepath);
 
             if (!isFileExist(parentPath, file.getName()))
@@ -326,7 +337,7 @@ public class Files {
          * @return true if file exists else false
          */
         public boolean isFileExist(String parentPath, String filename) {
-            String path = parentPath + filename;
+            String path = parentPath + "/" + filename;
             File file = new File(path);
             return file.exists();
         }
@@ -359,7 +370,9 @@ public class Files {
 
             if (!file.exists()) {
                 if (file.mkdirs()) {
-                    Log.i(TAG, "getOutputPath: Directory created");
+                    if (debug) {
+                        Log.i(TAG, "getOutputPath: Directory created");
+                    }
                 }
             }
 
@@ -379,7 +392,9 @@ public class Files {
 
             if (!file.exists()) {
                 if (file.mkdirs()) {
-                    Log.i(TAG, "getOutputPath: Directory created");
+                    if (debug) {
+                        Log.i(TAG, "getOutputPath: Directory created");
+                    }
                 }
             }
 
@@ -397,7 +412,9 @@ public class Files {
 
             if (!file.exists()) {
                 if (file.mkdirs()) {
-                    Log.i(TAG, "getOutputPathWithoutExt: Directory created");
+                    if (debug) {
+                        Log.i(TAG, "getOutputPathWithoutExt: Directory created");
+                    }
                 }
             }
 
@@ -464,7 +481,9 @@ public class Files {
          *
          * @param path - file path.
          * @return - file parent path.
+         * @deprecated - use {@link File#getParent()}
          */
+        @Deprecated
         public String getParentPath(String path) {
             if (path == null) return null;
 
@@ -474,6 +493,23 @@ public class Files {
                     : index < path.length()
                     ? path.substring(0, index + 1)
                     : null;
+        }
+
+        /**
+         * Extracts extension from the path
+         *
+         * @param path - file path.
+         * @return - extension of file.
+         */
+        public String getFileMimeType(String path) {
+            if (path == null) return null;
+
+            String extension = getFileExtension(path);
+
+            if (extension != null) {
+                return MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension.replace(".", ""));
+            }
+            return null;
         }
 
         /**
@@ -527,6 +563,115 @@ public class Files {
         public long getFileSize(File file) throws IOException {
             BasicFileAttributes attr = java.nio.file.Files.readAttributes(file.toPath(), BasicFileAttributes.class);
             return attr.size();
+        }
+
+        /**
+         * Store file object into android media store.
+         *
+         * @param file - to be add.
+         */
+        private void addToMediaStore(Context context, File file) {
+            Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+            intent.setData(Uri.fromFile(file));
+            context.sendBroadcast(intent);
+        }
+
+        /**
+         * Remove file object from android media store.
+         *
+         * @param file - to be delete.
+         */
+        private int removeFromMediaStore(Context context, File file) {
+            Utils utils = new Utils();
+
+            //check each media store and delete file from valid media store
+            // if i = 1 means file will be deleted, if 0 check next media store.
+            int i = utils.deleteFromVideoMediaStore(context, file); //delete file from video media store
+            if (i == 0)
+                i = utils.deleteFromAudioMediaStore(context, file); //delete file from audio media store
+            if (i == 0)
+                i = utils.deleteFromImagesMediaStore(context, file); //delete file from images media store
+            if (i == 0)
+                i = utils.deleteFromFileMediaStore(context, file); //delete file from files media store
+
+            return i;
+        }
+
+        /**
+         * Delete media from {@link MediaStore.Video}.
+         *
+         * @param file - to be delete.
+         */
+        public int deleteFromVideoMediaStore(Context context, File file) {
+            ContentResolver resolver = context.getContentResolver();
+
+            return resolver.delete(MediaStore.Video.Media.EXTERNAL_CONTENT_URI
+                    , MediaStore.Video.Media.DATA + "=?"
+                    , new String[]{file.getAbsolutePath()});
+        }
+
+        /**
+         * Delete media from {@link MediaStore.Audio}.
+         *
+         * @param file - to be delete.
+         */
+        public int deleteFromAudioMediaStore(Context context, File file) {
+            ContentResolver resolver = context.getContentResolver();
+
+            return resolver.delete(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
+                    , MediaStore.Video.Media.DATA + "=?"
+                    , new String[]{file.getAbsolutePath()});
+        }
+
+        /**
+         * Delete media from {@link MediaStore.Images}.
+         *
+         * @param file - to be delete.
+         */
+        public int deleteFromImagesMediaStore(Context context, File file) {
+            ContentResolver resolver = context.getContentResolver();
+
+            return resolver.delete(MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+                    , MediaStore.Video.Media.DATA + "=?"
+                    , new String[]{file.getAbsolutePath()});
+        }
+
+        /**
+         * Delete media from {@link MediaStore.Files}.
+         *
+         * @param file - to be delete.
+         */
+        public int deleteFromFileMediaStore(Context context, File file) {
+            ContentResolver resolver = context.getContentResolver();
+
+            return resolver.delete(MediaStore.Files.getContentUri("external")
+                    , MediaStore.Video.Media.DATA + "=?"
+                    , new String[]{file.getAbsolutePath()});
+        }
+
+        /**
+         * Write data of input file into output file.
+         *
+         * @param input  - source file.
+         * @param output - where data will written.
+         */
+        public boolean writeFile(File input, File output) {
+
+            try (InputStream in = new FileInputStream(input)) {  //input stream
+
+                OutputStream out = new FileOutputStream(output); //output stream
+
+                byte[] buf = new byte[1024];
+                int len;
+                while ((len = in.read(buf)) > 0) {
+                    out.write(buf, 0, len); //write input file data to output file
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                return false;
+            }
+            return true;
         }
     }
 }

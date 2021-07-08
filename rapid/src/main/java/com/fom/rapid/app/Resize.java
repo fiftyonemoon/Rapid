@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import androidx.annotation.IntDef;
 
 import com.fom.rapid.assistant.HeyMoon;
-import com.fom.rapid.resize.BuildConfig;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -20,8 +19,6 @@ import java.lang.annotation.RetentionPolicy;
  * @since 1.0.0
  */
 public class Resize<resize> {
-
-    private final boolean debug = BuildConfig.DEBUG;
 
     private View view;
 
@@ -101,9 +98,8 @@ public class Resize<resize> {
             params.width = (withHeight ? displayH : displayW) * width / (withHeight ? default_height : default_width);
         if (height > 0)
             params.height = (withWidth ? displayW : displayH) * height / (withWidth ? default_width : default_height);
-        if (debug) {
-            HeyMoon.log(view, Logs.logs.wh).show(params.width, params.height);
-        }
+
+        HeyMoon.log(view, Logs.logs.wh).show(params.width, params.height);
     }
 
     /**
@@ -122,9 +118,7 @@ public class Resize<resize> {
 
         view.setPadding(paddingStart, paddingTop, paddingEnd, paddingBottom);
 
-        if (debug) {
-            HeyMoon.log(view, Logs.logs.padding).show(paddingStart, paddingTop, paddingEnd, paddingBottom);
-        }
+        HeyMoon.log(view, Logs.logs.padding).show(paddingStart, paddingTop, paddingEnd, paddingBottom);
     }
 
     /**
@@ -146,9 +140,7 @@ public class Resize<resize> {
 
             ((ViewGroup.MarginLayoutParams) params).setMargins(marginStart, marginTop, marginEnd, marginBottom);
 
-            if (debug) {
-                HeyMoon.log(view, Logs.logs.margin).show(marginStart, marginTop, marginEnd, marginBottom);
-            }
+            HeyMoon.log(view, Logs.logs.margin).show(marginStart, marginTop, marginEnd, marginBottom);
         }
     }
 
