@@ -3,15 +3,18 @@ package com.fom.rapid.assistant;
 import android.view.View;
 
 import com.fom.rapid.app.Dialogs;
+import com.fom.rapid.app.Directory;
 import com.fom.rapid.app.Logs;
+import com.fom.rapid.app.Media;
 import com.fom.rapid.app.Resize;
 import com.fom.rapid.app.UI;
 import com.fom.rapid.app.Files;
 
 /**
- * A virtual assistant of rapid library created on 28th May 2021.
+ * 28th May 2021.
+ * A virtual assistant of rapid library.
  *
- * @author hardkgosai.
+ * @author <a href="https://github.com/fiftyonemoon">hardkgosai</a>.
  * @since 1.0.0
  */
 public class HeyMoon {
@@ -22,8 +25,8 @@ public class HeyMoon {
      *
      * @since 1.0.0
      */
-    public static Resize<Object> resize() {
-        return new Resize<>();
+    public static Resize resize() {
+        return new Resize();
     }
 
     /**
@@ -64,5 +67,25 @@ public class HeyMoon {
      */
     public static Files file() {
         return new Files();
+    }
+
+    /**
+     * {@link Directory} class constructor.
+     * A class to create directory as well as file in android specified directory.
+     *
+     * @since 1.0.3.2
+     */
+    public static Directory directory() {
+        return new Directory();
+    }
+
+    /**
+     * {@link Media} class constructor.
+     * A class to read all media objects from device.
+     *
+     * @since 1.0.3.2
+     */
+    public static Media media() {
+        return new Media();
     }
 }

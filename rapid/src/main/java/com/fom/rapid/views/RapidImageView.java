@@ -13,9 +13,10 @@ import com.fom.rapid.resize.R;
 import com.fom.rapid.assistant.HeyMoon;
 
 /**
- * Created on 28th May 2021.
+ * 28th May 2021.
+ * Hybrid view of {@link android.widget.ImageView}.
  *
- * @author hardkgosai.
+ * @author <a href="https://github.com/fiftyonemoon">hardkgosai</a>.
  * @since 1.0.0
  */
 public class RapidImageView extends androidx.appcompat.widget.AppCompatImageView implements ViewTreeObserver.OnGlobalLayoutListener {
@@ -81,7 +82,10 @@ public class RapidImageView extends androidx.appcompat.widget.AppCompatImageView
     private void resize(View view) {
         HeyMoon.resize()
                 .view(view)
-                .with(measureWith, measureMargin, measurePadding, landscapeMode)
+                .measureWith(measureWith)
+                .measureMargin(measureMargin)
+                .measurePadding(measurePadding)
+                .landscapeMode(landscapeMode)
                 .now(getContext());
     }
 

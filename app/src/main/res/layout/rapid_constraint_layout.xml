@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg"
     app:measureWith="width"
-    app:measureMargin="false"
     app:resizeChildren="true">
 
     <ImageView

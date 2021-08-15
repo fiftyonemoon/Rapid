@@ -8,9 +8,9 @@ import android.view.WindowInsets;
 import android.widget.Toast;
 
 /**
- * Created on 12th June 2021.
+ * 12th June 2021.
  *
- * @author hardkgosai.
+ * @author <a href="https://github.com/fiftyonemoon">hardkgosai</a>.
  * @since 1.0.2
  */
 public class UI {
@@ -82,26 +82,25 @@ public class UI {
      */
     public void hideSystemUI(Window window) { //pass getWindow();
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-
+        //don't use for now
+       /* if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.getInsetsController().hide(WindowInsets.Type.systemBars());
+        }*/
 
-        } else {
+        View decorView = window.getDecorView();
 
-            View decorView = window.getDecorView();
+        int uiVisibility = decorView.getSystemUiVisibility();
 
-            int uiVisibility = decorView.getSystemUiVisibility();
-
-            uiVisibility |= View.SYSTEM_UI_FLAG_LOW_PROFILE;
-            uiVisibility |= View.SYSTEM_UI_FLAG_FULLSCREEN;
-            uiVisibility |= View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                uiVisibility |= View.SYSTEM_UI_FLAG_IMMERSIVE;
-                uiVisibility |= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
-            }
-
-            decorView.setSystemUiVisibility(uiVisibility);
+        uiVisibility |= View.SYSTEM_UI_FLAG_LOW_PROFILE;
+        uiVisibility |= View.SYSTEM_UI_FLAG_FULLSCREEN;
+        uiVisibility |= View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            uiVisibility |= View.SYSTEM_UI_FLAG_IMMERSIVE;
+            uiVisibility |= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
         }
+
+        decorView.setSystemUiVisibility(uiVisibility);
+
     }
 
     /**
@@ -111,24 +110,24 @@ public class UI {
      */
     public void showSystemUI(Window window) { //pass getWindow();
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-
+        //don't use for now
+        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.getInsetsController().show(WindowInsets.Type.systemBars());
+        }*/
 
-        } else {
-            View decorView = window.getDecorView();
+        View decorView = window.getDecorView();
 
-            int uiVisibility = decorView.getSystemUiVisibility();
+        int uiVisibility = decorView.getSystemUiVisibility();
 
-            uiVisibility &= ~View.SYSTEM_UI_FLAG_LOW_PROFILE;
-            uiVisibility &= ~View.SYSTEM_UI_FLAG_FULLSCREEN;
-            uiVisibility &= ~View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                uiVisibility &= ~View.SYSTEM_UI_FLAG_IMMERSIVE;
-                uiVisibility &= ~View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
-            }
-
-            decorView.setSystemUiVisibility(uiVisibility);
+        uiVisibility &= ~View.SYSTEM_UI_FLAG_LOW_PROFILE;
+        uiVisibility &= ~View.SYSTEM_UI_FLAG_FULLSCREEN;
+        uiVisibility &= ~View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            uiVisibility &= ~View.SYSTEM_UI_FLAG_IMMERSIVE;
+            uiVisibility &= ~View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
         }
+
+        decorView.setSystemUiVisibility(uiVisibility);
+
     }
 }

@@ -8,7 +8,7 @@ import com.fom.rapid.assistant.HeyMoon;
 /**
  * Created on 13th June 2021.
  *
- * @author hardkgosai.
+ * @author <a href="https://github.com/fiftyonemoon">hardkgosai</a>.
  * @since 1.0.2
  */
 public class Logs {

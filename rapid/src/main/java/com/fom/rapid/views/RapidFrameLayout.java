@@ -5,9 +5,10 @@ import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
 /**
- * Created on 28th May 2021.
+ * 28th May 2021.
+ * Hybrid view of {@link FrameLayout}.
  *
- * @author hardkgosai.
+ * @author <a href="https://github.com/fiftyonemoon">hardkgosai</a>.
  * @since 1.0.0
  */
 public class RapidFrameLayout extends FrameLayout {

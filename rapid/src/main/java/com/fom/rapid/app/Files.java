@@ -1,20 +1,24 @@
 package com.fom.rapid.app;
 
+import android.app.PendingIntent;
+import android.app.RecoverableSecurityException;
 import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.webkit.MimeTypeMap;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.IntentSenderRequest;
 import androidx.annotation.RequiresApi;
 import androidx.core.content.FileProvider;
 
 import com.fom.rapid.assistant.HeyMoon;
-import com.fom.rapid.resize.BuildConfig;
 import com.fom.rapid.resize.R;
 
 import java.io.File;
@@ -33,13 +37,12 @@ import java.util.List;
  * Created on 26th June 2021.
  * A class to handle file related functions.
  *
- * @author hardkgosai.
+ * @author <a href="https://github.com/fiftyonemoon">hardkgosai</a>.
  * @since 1.0.3
  */
 public class Files {
 
     private static final String TAG = HeyMoon.class.getName();
-    private static final boolean debug = BuildConfig.DEBUG;
 
     /**
      * {@link Editor} class constructor.
@@ -89,10 +92,8 @@ public class Files {
             //final path with unique name
             String finalPath = utils.getUniqueFileName(finalDest);
 
-            if (debug) {
-                Log.d(TAG, "copy: real path: " + input.getPath());
-                Log.d(TAG, "copy: final path: " + finalPath);
-            }
+            Log.d(TAG, "copy: real path: " + input.getPath());
+            Log.d(TAG, "copy: final path: " + finalPath);
 
             //create file object of final path
             File output = new File(finalPath);
@@ -118,7 +119,9 @@ public class Files {
          * File delete.
          *
          * @param file - A file to delete.
+         * @deprecated - use {{@link #delete(Context, ActivityResultLauncher, Uri)}} instead.
          */
+        @Deprecated
         public void delete(Context context, File file) {
 
             //check file existence
@@ -128,17 +131,55 @@ public class Files {
 
                     int i = HeyMoon.file().utils().removeFromMediaStore(context, file);
 
-                    if (debug) {
-                        Log.d(TAG, "delete: " + (i > 0
-                                ? "File deleted from media store"
-                                : "Failed to delete file from media store"));
-                    }
+                    Log.d(TAG, "delete: " + (i > 0
+                            ? "File deleted from media store"
+                            : "Failed to delete file from media store"));
 
                     if (listener != null) listener.onComplete("");
 
                 } else if (listener != null) listener.onError("Failed to delete, File is valid?");
 
             } else if (listener != null) listener.onError("File not exist");
+        }
+
+        /**
+         * File delete.
+         * Delete file using content resolver.
+         *
+         * @param uri - A file to delete.
+         */
+        public void delete(Context context, ActivityResultLauncher<IntentSenderRequest> launcher, Uri uri) {
+
+            ContentResolver contentResolver = context.getContentResolver();
+
+            try {
+
+                contentResolver.delete(uri, null, null);
+
+            } catch (SecurityException e) {
+
+                PendingIntent pendingIntent = null;
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+
+                    ArrayList<Uri> collection = new ArrayList<>();
+                    collection.add(uri);
+                    pendingIntent = MediaStore.createDeleteRequest(contentResolver, collection);
+
+                } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+
+                    if (e instanceof RecoverableSecurityException) {
+                        RecoverableSecurityException exception = (RecoverableSecurityException) e;
+                        pendingIntent = exception.getUserAction().getActionIntent();
+                    }
+                }
+
+                if (pendingIntent != null) {
+                    IntentSender sender = pendingIntent.getIntentSender();
+                    IntentSenderRequest request = new IntentSenderRequest.Builder(sender).build();
+                    launcher.launch(request);
+                }
+            }
         }
 
         /**
@@ -164,17 +205,18 @@ public class Files {
             //get file extension
             String fileExt = utils.getFileExtension(input.getPath());
 
+            //check new name has extension
+            boolean isExt = rename.contains(fileExt);
+
             //temporary path with new name
-            String tempPath = input.getPath().replace(input.getName(), rename) + fileExt;
+            String tempPath = input.getPath().replace(input.getName(), rename) + (isExt ? "" : fileExt);
 
             //final path with unique name
             String finalPath = utils.getUniqueFileName(tempPath);
 
-            if (debug) {
-                Log.d(TAG, "rename: real path: " + input.getPath());
-                Log.d(TAG, "rename: temp path: " + tempPath);
-                Log.d(TAG, "rename: final path: " + finalPath);
-            }
+            Log.d(TAG, "rename: real path: " + input.getPath());
+            Log.d(TAG, "rename: temp path: " + tempPath);
+            Log.d(TAG, "rename: final path: " + finalPath);
 
             //create file object of final path
             File output = new File(finalPath);
@@ -306,7 +348,7 @@ public class Files {
         }
 
         /**
-         * Get unique name of file if original name already exist in storage.
+         * Get unique name of file if original name already exist in directory.
          */
         public String getUniqueFileName(String filepath) {
 
@@ -370,9 +412,7 @@ public class Files {
 
             if (!file.exists()) {
                 if (file.mkdirs()) {
-                    if (debug) {
-                        Log.i(TAG, "getOutputPath: Directory created");
-                    }
+                    Log.i(TAG, "getOutputPath: Directory created");
                 }
             }
 
@@ -392,9 +432,7 @@ public class Files {
 
             if (!file.exists()) {
                 if (file.mkdirs()) {
-                    if (debug) {
-                        Log.i(TAG, "getOutputPath: Directory created");
-                    }
+                    Log.i(TAG, "getOutputPath: Directory created");
                 }
             }
 
@@ -412,9 +450,7 @@ public class Files {
 
             if (!file.exists()) {
                 if (file.mkdirs()) {
-                    if (debug) {
-                        Log.i(TAG, "getOutputPathWithoutExt: Directory created");
-                    }
+                    Log.i(TAG, "getOutputPathWithoutExt: Directory created");
                 }
             }
 
@@ -514,9 +550,13 @@ public class Files {
 
         /**
          * Convert file size into decimal format.
+         * It may return wrong size.
          *
          * @return - file size with written MB or KB.
+         * @deprecated - use {@link android.text.format.Formatter#formatFileSize(Context, long)}
+         * instead.
          */
+        @Deprecated
         public String getFileSizeInDecimalFormat(double size) {
             size = size / 1024.0;
 
@@ -582,17 +622,16 @@ public class Files {
          * @param file - to be delete.
          */
         private int removeFromMediaStore(Context context, File file) {
-            Utils utils = new Utils();
 
             //check each media store and delete file from valid media store
             // if i = 1 means file will be deleted, if 0 check next media store.
-            int i = utils.deleteFromVideoMediaStore(context, file); //delete file from video media store
+            int i = deleteFromVideoMediaStore(context, file); //delete file from video media store
             if (i == 0)
-                i = utils.deleteFromAudioMediaStore(context, file); //delete file from audio media store
+                i = deleteFromAudioMediaStore(context, file); //delete file from audio media store
             if (i == 0)
-                i = utils.deleteFromImagesMediaStore(context, file); //delete file from images media store
+                i = deleteFromImagesMediaStore(context, file); //delete file from images media store
             if (i == 0)
-                i = utils.deleteFromFileMediaStore(context, file); //delete file from files media store
+                i = deleteFromFileMediaStore(context, file); //delete file from files media store
 
             return i;
         }
@@ -650,7 +689,7 @@ public class Files {
         }
 
         /**
-         * Write data of input file into output file.
+         * Write input file data into output file.
          *
          * @param input  - source file.
          * @param output - where data will written.

@@ -13,12 +13,13 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /**
- * Created on 28th May 2021.
+ * 28th May 2021.
+ * A class to resize hybrid rapid views with applied attributes {@link Attrs}.
  *
- * @author hardkgosai.
+ * @author <a href="https://github.com/fiftyonemoon">hardkgosai</a>.
  * @since 1.0.0
  */
-public class Resize<resize> {
+public class Resize {
 
     private View view;
 
@@ -38,20 +39,66 @@ public class Resize<resize> {
     /**
      * The view which we have to resize.
      */
-    public Resize<resize> view(View view) {
+    public Resize view(View view) {
         this.view = view;
+        return this;
+    }
+
+    /**
+     * Measure view according to width and height.
+     *
+     * @param measureWith - {@link Attrs}.
+     * @since 1.0.3.2 (Added).
+     */
+    public Resize measureWith(@Attrs int measureWith) {
+        this.measureWith = measureWith;
+        return this;
+    }
+
+    /**
+     * Measure applied margin.
+     *
+     * @param measureMargin - if true applied margin will be measured, false to keep as it is.
+     * @since 1.0.3.2 (Added).
+     */
+    public Resize measureMargin(boolean measureMargin) {
+        this.measureMargin = measureMargin;
+        return this;
+    }
+
+    /**
+     * Measure applied padding.
+     *
+     * @param measurePadding - if true applied padding will be measured, false to keep as it is.
+     * @since 1.0.3.2 (Added).
+     */
+    public Resize measurePadding(boolean measurePadding) {
+        this.measurePadding = measurePadding;
+        return this;
+    }
+
+    /**
+     * Set layout orientation.
+     *
+     * @param landscapeMode - device orientation.
+     * @since 1.0.3.2 (Added).
+     */
+    public Resize landscapeMode(boolean landscapeMode) {
+        this.landscapeMode = landscapeMode;
         return this;
     }
 
     /**
      * Resize conditions.
      *
-     * @param measureWith    - {@link Attrs}
+     * @param measureWith    - {@link Attrs}.
      * @param measureMargin  - if true applied margin will be measured, false to keep as it is.
      * @param measurePadding - if true applied padding will be measured, false to keep as it is.
      * @param landscapeMode  - device orientation.
+     * @since 1.0.3.2 (Deprecated).
+     * @deprecated - use individual instead.
      */
-    public Resize<resize> with(@Attrs int measureWith, boolean measureMargin, boolean measurePadding, boolean landscapeMode) {
+    public Resize with(@Attrs int measureWith, boolean measureMargin, boolean measurePadding, boolean landscapeMode) {
         this.measureWith = measureWith;
         this.measureMargin = measureMargin;
         this.measurePadding = measurePadding;
@@ -72,9 +119,12 @@ public class Resize<resize> {
 
         displayW = displayMetrics.widthPixels;
         displayH = displayMetrics.heightPixels;
+        System.out.println(displayW + "-" + displayH);
 
         default_width = landscapeMode ? h1920 : w1080; // set width according to orientation
         default_height = landscapeMode ? w1080 : h1920; // set height according to orientation
+
+        System.out.println(default_width + "-default-" + default_height);
 
         ViewGroup.LayoutParams params = view.getLayoutParams();
 
@@ -201,11 +251,13 @@ public class Resize<resize> {
 
         /**
          * It will measure width and height of view according device width.
+         * Use in portrait mode for best practice.
          */
         int width = -1;
 
         /**
          * It will measure width and height of view according device height.
+         * Use in landscape mode for best practice.
          */
         int height = -2;
 

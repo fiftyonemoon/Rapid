@@ -2,13 +2,15 @@ package com.fom.rapid.views;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.widget.FrameLayout;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 /**
- * Created on 28th May 2021.
+ * 28th May 2021.
+ * Hybrid view of {@link ConstraintLayout}.
  *
- * @author hardkgosai.
+ * @author <a href="https://github.com/fiftyonemoon">hardkgosai</a>.
  * @since 1.0.0
  */
 public class RapidConstraintLayout extends ConstraintLayout {

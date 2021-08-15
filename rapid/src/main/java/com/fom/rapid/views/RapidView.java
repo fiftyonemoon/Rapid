@@ -13,9 +13,10 @@ import com.fom.rapid.assistant.HeyMoon;
 import com.fom.rapid.app.Resize;
 
 /**
- * Created on 28th May 2021.
+ * 28th May 2021.
+ * A class to handle hybrid rapid views.
  *
- * @author hardkgosai.
+ * @author <a href="https://github.com/fiftyonemoon">hardkgosai</a>.
  * @since 1.0.0
  */
 public class RapidView implements ViewTreeObserver.OnGlobalLayoutListener {
@@ -101,7 +102,10 @@ public class RapidView implements ViewTreeObserver.OnGlobalLayoutListener {
     private void resize(View view) {
         HeyMoon.resize()
                 .view(view)
-                .with(measureWith, measureMargin, measurePadding, landscapeMode)
+                .measureWith(measureWith)
+                .measureMargin(measureMargin)
+                .measurePadding(measurePadding)
+                .landscapeMode(landscapeMode)
                 .now(context);
     }
 

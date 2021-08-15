@@ -7,8 +7,7 @@
     android:orientation="horizontal"
     android:gravity="center"
     android:background="@drawable/bg"
-    app:measureWith="width"
-    app:measureMargin="false"
+    app:measureWith="height"
     app:resizeChildren="true"
     tools:context=".MainActivity">
 

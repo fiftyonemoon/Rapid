@@ -11,7 +11,7 @@ import com.fom.rapid.resize.R;
  * Created on 12th June 2021.
  * Purpose of this class is less coding, save time and work anywhere in the app.
  *
- * @author hardkgosai.
+ * @author <a href="https://github.com/fiftyonemoon">hardkgosai</a>.
  * @since 1.0.2
  */
 public class Dialogs {
