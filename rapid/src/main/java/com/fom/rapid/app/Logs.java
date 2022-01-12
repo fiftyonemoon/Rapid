@@ -1,12 +1,14 @@
 package com.fom.rapid.app;
 
+import android.content.res.Resources;
 import android.util.Log;
 import android.view.View;
 
 import com.fom.rapid.assistant.HeyMoon;
 
 /**
- * Created on 13th June 2021.
+ * 13th June 2021.
+ * Show final resized view arguments.
  *
  * @author <a href="https://github.com/fiftyonemoon">hardkgosai</a>.
  * @since 1.0.2
@@ -40,9 +42,16 @@ public class Logs {
 
     private String getId(View view) {
         if (view.getId() == View.NO_ID) return "no-id";
-        else return view.getResources()
-                .getResourceName(view.getId())
-                .replace("com.fom.rapid:id/", "");
+        else {
+            try {
+                return view.getResources()
+                        .getResourceName(view.getId())
+                        .replace("com.fom.rapid:id/", "");
+            } catch (Resources.NotFoundException e) {
+                e.printStackTrace();
+                return "no-id";
+            }
+        }
     }
 
     public enum logs {

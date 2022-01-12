@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
                 .measureWith(Resize.Attrs.width) //measure view with width or height, by default none
                 .measureMargin(false) //true to measure margin, false to keep as it is, by default false
                 .measurePadding(false) //true to measure padding, false to keep as it is, by default false
-                .landscapeMode(false) //applied as per orientation, by default false
+                .landscapeMode(false) //apply as per orientation, by default false
                 .now(this);
     }
 
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         //.delete(this, file); use to delete the file
         //.rename(this, file, "rename.jpg") use to rename the file
 
-        /* ----------------- Use of File Util --------------------- */
+        /* ----------------- Use of File Utils --------------------- */
 
         HeyMoon.file()
                 .utils() // contain file related functions
@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
         //for multi purpose - defined globally
         Directory directory = HeyMoon.directory().with(this).type(Directory.DirectoryType.Images);//single time initialise
 
-        String path = directory.createDirectory("Your directory path");
+        boolean success = directory.createDirectory("Your directory path");
         Uri uri = directory.createFile("Example.jpg"); //create file
         Uri uri1 = directory.createFile("ExampleDirectory", "Example.jpg"); //create file with directory
 

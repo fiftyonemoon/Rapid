@@ -47,7 +47,7 @@ public class Directory {
     /**
      * Create directory.
      */
-    public String createDirectory(String path) {
+    public boolean createDirectory(String path) {
 
         File dir = new File(path);
         if (!dir.exists()) {
@@ -55,7 +55,7 @@ public class Directory {
                 Log.e(TAG, "Directory could not be created");
             }
         }
-        return dir.getAbsolutePath() + "/";
+        return dir.exists();
     }
 
     /**
@@ -71,6 +71,7 @@ public class Directory {
             return generateUri(contentValues);
 
         } else {
+
             File file = new File(directory, filename);
 
             if (!file.exists()) {
@@ -169,7 +170,6 @@ public class Directory {
          * Android Documents directory.
          */
         int Document = 0x27129603;
-
         /**
          * Android Downloads directory.
          */

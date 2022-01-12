@@ -119,12 +119,9 @@ public class Resize {
 
         displayW = displayMetrics.widthPixels;
         displayH = displayMetrics.heightPixels;
-        System.out.println(displayW + "-" + displayH);
 
         default_width = landscapeMode ? h1920 : w1080; // set width according to orientation
         default_height = landscapeMode ? w1080 : h1920; // set height according to orientation
-
-        System.out.println(default_width + "-default-" + default_height);
 
         ViewGroup.LayoutParams params = view.getLayoutParams();
 

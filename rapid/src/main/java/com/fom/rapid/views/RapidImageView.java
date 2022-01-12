@@ -9,6 +9,7 @@ import android.view.ViewTreeObserver;
 
 import androidx.annotation.Nullable;
 
+import com.fom.rapid.app.Resize;
 import com.fom.rapid.resize.R;
 import com.fom.rapid.assistant.HeyMoon;
 
@@ -50,9 +51,9 @@ public class RapidImageView extends androidx.appcompat.widget.AppCompatImageView
 
             TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.RapidImageView, defStyle, 0);
 
-            measureWith = array.getInt(R.styleable.RapidImageView_measureWith, 0);
-            measureMargin = array.getBoolean(R.styleable.RapidImageView_measureMargin, true);
-            measurePadding = array.getBoolean(R.styleable.RapidImageView_measurePadding, true);
+            measureWith = array.getInt(R.styleable.RapidImageView_measureWith, Resize.Attrs.none);
+            measureMargin = array.getBoolean(R.styleable.RapidImageView_measureMargin, false);
+            measurePadding = array.getBoolean(R.styleable.RapidImageView_measurePadding, false);
             landscapeMode = context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
 
             //add this view on global layout listener
@@ -75,7 +76,7 @@ public class RapidImageView extends androidx.appcompat.widget.AppCompatImageView
     }
 
     /**
-     * Request assistant {@link HeyMoon} to resize all child.
+     * Request assistant {@link HeyMoon} to resize view.
      *
      * @param view which we have to resize.
      */
