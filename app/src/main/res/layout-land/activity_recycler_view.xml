@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.fom.rapid.views.RapidConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:resizeChildren="true"
+    app:measureWith="width"
+    tools:context=".RecyclerViewActivity">
+
+    <TextView
+        android:id="@+id/ivBack"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:drawablePadding="16dp"
+        android:text="@string/recyclerview_example"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:gravity="start|center"
+        android:contentDescription="@null"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:drawableStartCompat="@drawable/ic_back" />
+
+    <com.fom.rapid.views.RapidRecyclerView
+        android:id="@+id/rvExample"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivBack"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</com.fom.rapid.views.RapidConstraintLayout>
