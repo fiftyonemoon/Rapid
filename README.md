@@ -2,7 +2,7 @@
  Hello World!
  
  A library that automatically resize your XML layout with device width and height.
- No matter your device orientation is protrait or landscape.
+ No matter your device orientation is portrait or landscape.
  
 ## Important
 - Create your design with default 1080x1920 screen size.
@@ -23,7 +23,7 @@ allprojects {
 ```
 
 ```groovy
-implementation 'com.github.fiftyonemoon:Rapid:1.0.3.1'
+implementation 'com.github.fiftyonemoon:Rapid:1.0.3.2'
 ```
 ## Overview
 
