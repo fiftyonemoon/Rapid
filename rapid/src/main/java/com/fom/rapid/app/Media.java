@@ -16,6 +16,7 @@ import com.fom.rapid.model.MediaObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -99,7 +100,9 @@ public class Media {
 
         do {
 
-            if (observer != null) observer.onObserving(cursor.getPosition());
+            if (observer != null) {
+                observer.onObserving(cursor.getPosition());
+            }
 
             MediaObject object = new MediaObject();
             setCursorCommonObject(cursor, object);
@@ -126,37 +129,80 @@ public class Media {
 
     /**
      * set common local data.
+     *
+     * @since 1.0.3.4 (Separate column index to check column exist or not).
      */
     private void setCursorCommonObject(Cursor cursor, MediaObject object) {
-        object.setId(cursor.getString(cursor.getColumnIndexOrThrow(BaseColumns._ID)));
-        object.setBucketId(cursor.getString(cursor.getColumnIndexOrThrow("bucket_id")));
-        object.setBucketName(cursor.getString(cursor.getColumnIndexOrThrow("bucket_display_name")));
-        object.setUri(cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA)));
-        object.setName(cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DISPLAY_NAME)));
-        object.setMime(cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.MIME_TYPE)));
-        object.setSize(cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.SIZE)));
-        object.setDate(cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATE_MODIFIED)));
 
-        if (action == MediaAction.audio)
+        int column_id = cursor.getColumnIndex(BaseColumns._ID);
+        int column_bucket_id = cursor.getColumnIndex("bucket_id");
+        int column_bucket_name = cursor.getColumnIndex("bucket_display_name");
+        int column_uri = cursor.getColumnIndex(MediaStore.MediaColumns.DATA);
+        int column_name = cursor.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME);
+        int column_mime = cursor.getColumnIndex(MediaStore.MediaColumns.MIME_TYPE);
+        int column_size = cursor.getColumnIndex(MediaStore.MediaColumns.SIZE);
+        int column_date = cursor.getColumnIndex(MediaStore.MediaColumns.DATE_MODIFIED);
+
+        String id = column_id >= 0 ? cursor.getString(column_id) : "";
+        String bucket_id = column_bucket_id >= 0 ? cursor.getString(column_bucket_id) : "";
+        String bucket_name = column_bucket_name >= 0 ? cursor.getString(column_bucket_name) : "";
+        String uri = column_uri >= 0 ? cursor.getString(column_uri) : "";
+        String name = column_name >= 0 ? cursor.getString(column_name) : "";
+        String mime = column_mime >= 0 ? cursor.getString(column_mime) : "";
+        long size = column_size >= 0 ? cursor.getLong(column_size) : 0;
+        long date = column_date >= 0 ? cursor.getLong(column_date) : 0;
+
+        object.setId(id);
+        object.setBucketId(bucket_id);
+        object.setBucketName(bucket_name);
+        object.setUri(uri);
+        object.setName(name);
+        object.setMime(mime);
+        object.setSize(size);
+        object.setDate(date);
+
+        if (action == MediaAction.audio) {
             object.setArt(getAlbumArt(cursor));
+        }
     }
 
     /**
      * set data using {@link Cursor} for sdk {@link Build.VERSION_CODES#R} and above.
+     *
+     * @since 1.0.3.4 (Separate column index to check column exist or not).
      */
     @RequiresApi(api = Build.VERSION_CODES.R)
     private void setCursorObjectForAndroidXI(Cursor cursor, MediaObject object) {
-        object.setAlbum(cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.ALBUM)));
-        object.setArtist(cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.ARTIST)));
-        object.setComposer(cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.COMPOSER)));
-        object.setGenre(cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.GENRE)));
-        object.setYear(cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.YEAR)));
-        object.setDuration(cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DURATION)));
-        object.setResolution(cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.RESOLUTION)));
+
+        int column_album = cursor.getColumnIndex(MediaStore.MediaColumns.ALBUM);
+        int column_artist = cursor.getColumnIndex(MediaStore.MediaColumns.ARTIST);
+        int column_composer = cursor.getColumnIndex(MediaStore.MediaColumns.COMPOSER);
+        int column_genre = cursor.getColumnIndex(MediaStore.MediaColumns.GENRE);
+        int column_year = cursor.getColumnIndex(MediaStore.MediaColumns.YEAR);
+        int column_duration = cursor.getColumnIndex(MediaStore.MediaColumns.DURATION);
+        int column_resolution = cursor.getColumnIndex(MediaStore.MediaColumns.RESOLUTION);
+
+        String album = column_album >= 0 ? cursor.getString(column_album) : "";
+        String artist = column_artist >= 0 ? cursor.getString(column_artist) : "";
+        String composer = column_composer >= 0 ? cursor.getString(column_composer) : "";
+        String genre = column_genre >= 0 ? cursor.getString(column_genre) : "";
+        String year = column_year >= 0 ? cursor.getString(column_year) : "";
+        String resolution = column_resolution >= 0 ? cursor.getString(column_resolution) : "";
+        long duration = column_duration >= 0 ? cursor.getLong(column_duration) : 0;
+
+        object.setAlbum(album);
+        object.setArtist(artist);
+        object.setComposer(composer);
+        object.setGenre(genre);
+        object.setYear(year);
+        object.setResolution(resolution);
+        object.setDuration(duration);
     }
 
     /**
      * set data using {@link MediaMetadataRetriever} for sdk {@link Build.VERSION_CODES#P} and below.
+     *
+     * @since 1.0.3.4 (Separate column index to check column exist or not).
      */
     private void setMediaRetrieverObject(Cursor cursor, MediaObject object) {
         try {
@@ -165,17 +211,29 @@ public class Media {
 
             object.setAlbum(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM));
             object.setArtist(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST));
-            object.setComposer(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_GENRE));
-            object.setGenre(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_COMPOSER));
+            object.setComposer(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_COMPOSER));
+            object.setGenre(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_GENRE));
             object.setYear(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_YEAR));
             object.setResolution(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_WIDTH)
                     + "x"
                     + retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_HEIGHT));
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                object.setDuration(cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DURATION)));
-            } else
-                object.setDuration(Long.parseLong(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION)));
+
+                //change: since 1.0.3.4
+                int column_duration = cursor.getColumnIndex(MediaStore.MediaColumns.DURATION);
+                long duration = column_duration >= 0 ? cursor.getLong(column_duration) : 0;
+
+                object.setDuration(duration);
+
+            } else {
+
+                //change: since 1.0.3.4
+                String meta_duration = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
+                long duration = meta_duration != null ? Long.parseLong(meta_duration) : 0;
+
+                object.setDuration(duration);
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -228,16 +286,22 @@ public class Media {
      * This function is only for {@link MediaAction#audio} action.
      *
      * @return audio album thumbnail.
+     * @since 1.0.3.4 (Separate column index to check column exist or not).
      */
     private String getAlbumArt(Cursor cursor) {
-        long albumId = cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID));
+        int column_albumId = cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID);
+        int column_album_art = cursor.getColumnIndex(MediaStore.Audio.Albums.ALBUM_ART);
+
+        long albumId = column_albumId >= 0 ? cursor.getLong(column_albumId) : -1;
+
+        if (albumId == -1) return null;
 
         Cursor cursorAlbum = context.getContentResolver().query(MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI,
                 new String[]{MediaStore.Audio.Albums._ID, MediaStore.Audio.Albums.ALBUM_ART},
                 MediaStore.Audio.Albums._ID + "=" + albumId, null, null);
 
-        String art = cursorAlbum.moveToFirst()
-                ? cursorAlbum.getString(cursorAlbum.getColumnIndex(MediaStore.Audio.Albums.ALBUM_ART))
+        String art = cursorAlbum.moveToFirst() && column_album_art >= 0
+                ? cursorAlbum.getString(column_album_art)
                 : null;
 
         cursorAlbum.close();
@@ -250,7 +314,7 @@ public class Media {
      */
     private void sort(ArrayList<MediaObject> list) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            list.sort((o1, o2) -> o1.getName().compareTo(o2.getName()));
+            list.sort(Comparator.comparing(MediaObject::getName));
         } else {
             Collections.sort(list, (o1, o2) -> o1.getName().compareTo(o2.getName()));
         }

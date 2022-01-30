@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
      * Progress dialog example.
      */
     private void showProgressDialog() {
-        HeyMoon.dialogs().progress().show(this);
+        HeyMoon.dialogs().progress().cancelable(true).show(this);
 
         //dismiss and finish activity after 2 sec
         new Handler(Looper.myLooper()).postDelayed(() -> {

@@ -7,6 +7,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+/**
+ * 30th Jan 2022.
+ * Hybrid view of {@link RecyclerView}.
+ * Currently under coding.
+ *
+ * @author <a href="https://github.com/fiftyonemoon">hardkgosai</a>.
+ * @since 1.0.3.3
+ */
 public class RapidRecyclerView extends RecyclerView {
 
     private Context context;

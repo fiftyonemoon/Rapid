@@ -60,7 +60,7 @@ public class Dialogs {
             }
 
             public Dialog listener(DialogInterface.OnClickListener listener) {
-                this.listener = listener ;
+                this.listener = listener;
                 return this;
             }
 
@@ -128,10 +128,20 @@ public class Dialogs {
     public static class Progress {
 
         private ProgressDialog progressDialog;
+        private boolean cancelable;
+
+        /**
+         * @since 1.0.3.4 (Added).
+         */
+        public Progress cancelable(boolean cancelable) {
+            this.cancelable = cancelable;
+            return this;
+        }
 
         public void show(Context context) {
             progressDialog = new ProgressDialog(context);
             progressDialog.setMessage(context.getString(R.string.please_wait));
+            progressDialog.setCancelable(cancelable);
             progressDialog.show();
         }
 
