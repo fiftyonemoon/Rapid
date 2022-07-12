@@ -23,7 +23,7 @@ allprojects {
 ```
 
 ```groovy
-implementation 'com.github.fiftyonemoon:Rapid:1.0.3.4'
+implementation 'com.github.fiftyonemoon:Rapid:1.0.3.5'
 ```
 ## Overview
 
