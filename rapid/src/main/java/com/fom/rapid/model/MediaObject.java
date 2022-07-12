@@ -1,5 +1,8 @@
 package com.fom.rapid.model;
 
+import android.annotation.TargetApi;
+import android.os.Build;
+
 public class MediaObject {
 
     private String bucketId;
@@ -15,6 +18,8 @@ public class MediaObject {
     private String genre;
     private String year;
     private String resolution;
+    private String resolutionWidth;
+    private String resolutionHeight;
     private long size;
     private long date;
     private long duration;
@@ -125,6 +130,26 @@ public class MediaObject {
 
     public void setResolution(String resolution) {
         this.resolution = resolution;
+    }
+
+    @TargetApi(Build.VERSION_CODES.R)
+    public String getResolutionWidth() {
+        return resolutionWidth;
+    }
+
+    @TargetApi(Build.VERSION_CODES.R)
+    public void setResolutionWidth(String resolutionWidth) {
+        this.resolutionWidth = resolutionWidth;
+    }
+
+    @TargetApi(Build.VERSION_CODES.R)
+    public String getResolutionHeight() {
+        return resolutionHeight;
+    }
+
+    @TargetApi(Build.VERSION_CODES.R)
+    public void setResolutionHeight(String resolutionHeight) {
+        this.resolutionHeight = resolutionHeight;
     }
 
     public long getSize() {

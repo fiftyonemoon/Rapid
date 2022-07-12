@@ -82,6 +82,13 @@ public class Dialogs {
                     alertInstance = null;
                 }
             }
+
+            /**
+             * @since 1.0.3.5 (Added).
+             */
+            public AlertDialog getAlertDialog() {
+                return alertDialog;
+            }
         }
     }
 
@@ -128,6 +135,7 @@ public class Dialogs {
     public static class Progress {
 
         private ProgressDialog progressDialog;
+        private String message;
         private boolean cancelable;
 
         /**
@@ -138,10 +146,20 @@ public class Dialogs {
             return this;
         }
 
+        /**
+         * @since 1.0.3.5 (Added).
+         */
+        public Progress message(String message) {
+            this.message = message;
+            return this;
+        }
+
         public void show(Context context) {
             progressDialog = new ProgressDialog(context);
-            progressDialog.setMessage(context.getString(R.string.please_wait));
             progressDialog.setCancelable(cancelable);
+            progressDialog.setMessage(message != null
+                    ? message
+                    : context.getString(R.string.please_wait));
             progressDialog.show();
         }
 
@@ -151,6 +169,13 @@ public class Dialogs {
                 progressDialog = null;
                 progressInstance = null;
             }
+        }
+
+        /**
+         * @since 1.0.3.5 (Added).
+         */
+        public ProgressDialog getProgressDialog() {
+            return progressDialog;
         }
     }
 }
