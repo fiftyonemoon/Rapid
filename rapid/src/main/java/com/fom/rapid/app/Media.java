@@ -18,6 +18,7 @@ import androidx.core.app.ActivityCompat;
 
 import com.fom.rapid.model.MediaObject;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -190,6 +191,13 @@ public class Media {
         String mime = isColumnIndexValid(cursor, column_mime) ? cursor.getString(column_mime) : "";
         long size = isColumnIndexValid(cursor, column_size) ? cursor.getLong(column_size) : 0;
         long date = isColumnIndexValid(cursor, column_date) ? cursor.getLong(column_date) : 0;
+
+        //change: since 1.0.3.6 (Added)
+        if (bucket_name.isEmpty()) {
+            File child = new File(uri);
+            File parent = child.exists() ? child.getParentFile() : null;
+            bucket_name = parent != null && parent.exists() ? parent.getName() : "Unknown";
+        }
 
         object.setId(id);
         object.setBucketId(bucket_id);
