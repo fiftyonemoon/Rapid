@@ -39,6 +39,7 @@ public class Media {
     private Context context;
     private MediaAction action;
     private MediaObserver observer;
+    private boolean isTerminate;
 
     public static final HashMap<String, ArrayList<MediaObject>> audioMap = new HashMap<>();
     public static final HashMap<String, ArrayList<MediaObject>> videoMap = new HashMap<>();
@@ -66,6 +67,16 @@ public class Media {
         return this;
     }
 
+    /***
+     * Terminate currently active executor task.
+     * {@link MediaObserver#onComplete()} will called after termination.
+     *
+     * @since 1.0.3.6 (Added).
+     */
+    public void terminate() {
+        this.isTerminate = true;
+    }
+
     /**
      * Observe retrieving process.
      */
@@ -76,17 +87,18 @@ public class Media {
 
         this.observer = observer;
 
-        ExecutorService executor = Executors.newSingleThreadExecutor();
+        ExecutorService executorService = Executors.newFixedThreadPool(1);
         Handler handler = new Handler(Looper.getMainLooper());
 
-        executor.execute(() -> {
+        executorService.execute(() -> {
 
             clear();
             retrieve();
 
             handler.post(() -> {
-                if (observer != null)
+                if (observer != null) {
                     observer.onComplete();
+                }
             });
         });
     }
@@ -116,9 +128,15 @@ public class Media {
                 , null
                 , null);
 
+        //change: since 1.0.3.6 (Added)
+        if (cursor == null || cursor.getCount() == 0) return;
+
         cursor.moveToFirst();
 
         do {
+
+            //change: since 1.0.3.6 (Added)
+            if (isTerminate) break;
 
             if (observer != null) {
                 observer.onObserving(cursor.getPosition());
@@ -127,7 +145,7 @@ public class Media {
             MediaObject object = new MediaObject();
             setCursorCommonObject(cursor, object);
 
-            if (action == MediaAction.audio | action == MediaAction.video) {
+            if (action == MediaAction.Audio || action == MediaAction.Video) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                     setCursorObjectForAndroidXI(cursor, object);
                 } else {
@@ -182,7 +200,7 @@ public class Media {
         object.setSize(size);
         object.setDate(date);
 
-        if (action == MediaAction.audio) {
+        if (action == MediaAction.Audio) {
             object.setArt(getAlbumArt(cursor));
         }
     }
@@ -257,9 +275,10 @@ public class Media {
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
 
-                //change: since 1.0.3.4
+                //change: since 1.0.3.4 (Removed)
+                //change: since 1.0.3.5
                 int column_duration = cursor.getColumnIndex(MediaStore.MediaColumns.DURATION);
-                long duration = column_duration >= 0 ? cursor.getLong(column_duration) : 0;
+                long duration = isColumnIndexValid(cursor, column_duration) ? cursor.getLong(column_duration) : 0;
 
                 object.setDuration(duration);
 
@@ -320,15 +339,17 @@ public class Media {
     }
 
     /**
-     * This function is only for {@link MediaAction#audio} action.
+     * This function is only for {@link MediaAction#Audio} action.
      *
      * @return audio album thumbnail.
      * @since 1.0.3.4 (Separate column index to check column exist or not).
+     * @since 1.0.3.5 (check cursor column condition).
      */
     private String getAlbumArt(Cursor cursor) {
         int column_albumId = cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID);
         int column_album_art = cursor.getColumnIndex(MediaStore.Audio.Albums.ALBUM_ART);
 
+        //change: since 1.0.3.5
         long albumId = isColumnIndexValid(cursor, column_albumId) ? cursor.getLong(column_albumId) : -1;
 
         if (albumId == -1) return null;
@@ -355,7 +376,9 @@ public class Media {
             //change: since 1.0.3.5 (added null condition)
             boolean isNull = o1 == null || o1.getName() == null
                     || o2 == null || o2.getName() == null;
-            return isNull ? -1 : o1.getName().compareTo(o2.getName());
+            return isNull
+                    ? -1
+                    : o1.getName().compareTo(o2.getName());
         });
 
         //not in use since 1.3.0.5
@@ -397,9 +420,9 @@ public class Media {
      * a selected list which contains selected media objects and a map which contains folder wise media objects.
      */
     public enum MediaAction {
-        audio(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, audioList, selectedAudioList, audioMap),
-        video(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, videoList, selectedVideoList, videoMap),
-        images(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, imagesList, selectedImagesList, imagesMap);
+        Audio(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, audioList, selectedAudioList, audioMap),
+        Video(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, videoList, selectedVideoList, videoMap),
+        Images(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, imagesList, selectedImagesList, imagesMap);
 
         private final Uri uri;
         private final ArrayList<MediaObject> list;
