@@ -132,22 +132,22 @@ public class MediaObject {
         this.resolution = resolution;
     }
 
-    @TargetApi(Build.VERSION_CODES.R)
     public String getResolutionWidth() {
-        return resolutionWidth;
+        return resolution != null && resolution.contains("x")
+                ? resolution.split("x")[0]
+                : "0";
     }
 
-    @TargetApi(Build.VERSION_CODES.R)
     public void setResolutionWidth(String resolutionWidth) {
         this.resolutionWidth = resolutionWidth;
     }
 
-    @TargetApi(Build.VERSION_CODES.R)
     public String getResolutionHeight() {
-        return resolutionHeight;
+        return resolution != null && resolution.contains("x")
+                ? resolution.split("x")[1]
+                : "0";
     }
 
-    @TargetApi(Build.VERSION_CODES.R)
     public void setResolutionHeight(String resolutionHeight) {
         this.resolutionHeight = resolutionHeight;
     }
@@ -182,5 +182,30 @@ public class MediaObject {
 
     public void setSelected(boolean selected) {
         this.selected = selected;
+    }
+
+    @Override
+    public String toString() {
+        return "MediaObject{" +
+                "bucketId='" + bucketId + '\'' +
+                ", bucketName='" + bucketName + '\'' +
+                ", id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", uri='" + uri + '\'' +
+                ", mime='" + mime + '\'' +
+                ", album='" + album + '\'' +
+                ", art='" + art + '\'' +
+                ", artist='" + artist + '\'' +
+                ", composer='" + composer + '\'' +
+                ", genre='" + genre + '\'' +
+                ", year='" + year + '\'' +
+                ", resolution='" + resolution + '\'' +
+                ", resolutionWidth='" + resolutionWidth + '\'' +
+                ", resolutionHeight='" + resolutionHeight + '\'' +
+                ", size=" + size +
+                ", date=" + date +
+                ", duration=" + duration +
+                ", selected=" + selected +
+                '}';
     }
 }
