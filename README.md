@@ -1,4 +1,6 @@
-# Rapid Resize
+# Rapid Resize (Not Maintaining Anymore)
+ Switch to [`RapidX`](https://github.com/fiftyonemoon/RapidX)
+ 
  Hello World!
  
  A library that automatically resize your XML layout with device width and height.
